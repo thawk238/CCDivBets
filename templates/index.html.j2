@@ -81,6 +81,19 @@
   .hist th:first-child, .hist td:first-child{text-align:left;}
   .hist th{color:var(--muted); font-size:.68rem; text-transform:uppercase; letter-spacing:.06em;}
 
+  .chart-legend{display:flex; flex-wrap:wrap; gap:14px; margin-bottom:14px;}
+  .chart-legend .lkey{display:flex; align-items:center; gap:6px; font-size:.78rem; color:var(--ink);}
+  .chart-legend .lkey .swatch{width:16px; height:2px; border-radius:1px; flex-shrink:0;}
+  .chart-box{position:relative; margin-bottom:26px;}
+  .chart-box svg{width:100%; height:auto; display:block; overflow:visible; touch-action:none;}
+  .chart-tick-label{font-size:11px; fill:var(--muted); font-family:var(--font-body);}
+  .chart-tooltip{position:absolute; pointer-events:none; background:var(--card); border:1px solid var(--line); border-radius:8px; padding:8px 10px; font-size:.76rem; min-width:130px; box-shadow:0 6px 18px rgba(0,0,0,.4); z-index:5;}
+  .chart-tooltip .tt-week{font-weight:700; color:var(--gold); margin-bottom:5px; font-size:.66rem; text-transform:uppercase; letter-spacing:.05em;}
+  .chart-tooltip .tt-row{display:flex; align-items:center; gap:6px; padding:2px 0;}
+  .chart-tooltip .tt-row .tt-key{width:12px; height:2px; border-radius:1px; flex-shrink:0;}
+  .chart-tooltip .tt-row .tt-val{font-weight:700; color:var(--ink); font-variant-numeric:tabular-nums; margin-left:auto;}
+  .chart-tooltip .tt-row .tt-name{color:var(--muted);}
+
   .footnote{margin-top:34px; padding-top:18px; border-top:1px solid var(--line); color:var(--muted); font-size:.78rem; line-height:1.6;}
 
   @media (max-width:480px){
@@ -184,6 +197,155 @@
 
     <div class="section-title">Score history</div>
     <div class="section-sub">Season-to-date total after each week's update.</div>
+
+    {% if history_weeks|length >= 2 %}
+    <div class="chart-legend" id="chart-legend"></div>
+    <div class="chart-box" id="chart-box">
+      <svg id="points-chart" viewBox="0 0 800 320" preserveAspectRatio="none" role="img" aria-label="Season-to-date points by week for each bettor"></svg>
+      <div class="chart-tooltip" id="chart-tooltip" hidden></div>
+    </div>
+    <script>
+      (function(){
+        var weeks = {{ history_weeks | tojson }};
+        var series = {{ chart_series | tojson }};
+
+        var svg = document.getElementById('points-chart');
+        var legendEl = document.getElementById('chart-legend');
+        var tooltip = document.getElementById('chart-tooltip');
+        var box = document.getElementById('chart-box');
+        var NS = 'http://www.w3.org/2000/svg';
+
+        var W = 800, H = 320;
+        var marginL = 42, marginR = 16, marginT = 14, marginB = 34;
+        var plotW = W - marginL - marginR;
+        var plotH = H - marginT - marginB;
+
+        var allPoints = [];
+        series.forEach(function(s){ allPoints = allPoints.concat(s.points); });
+        var maxVal = Math.max(1, Math.max.apply(null, allPoints));
+        var step = 25;
+        if (maxVal > 100) step = 50;
+        if (maxVal > 250) step = 100;
+        var niceMax = Math.ceil(maxVal / step) * step;
+        var ticks = [];
+        for (var v = 0; v <= niceMax; v += step) ticks.push(v);
+
+        function xAt(i){ return marginL + (weeks.length === 1 ? plotW / 2 : (plotW * i) / (weeks.length - 1)); }
+        function yAt(val){ return marginT + plotH - (val / niceMax) * plotH; }
+
+        function el(tag, attrs){
+          var e = document.createElementNS(NS, tag);
+          for (var k in attrs) e.setAttribute(k, attrs[k]);
+          return e;
+        }
+
+        ticks.forEach(function(val){
+          var y = yAt(val);
+          svg.appendChild(el('line', {x1: marginL, x2: W - marginR, y1: y, y2: y, stroke: 'var(--line)', 'stroke-width': 1, 'vector-effect': 'non-scaling-stroke'}));
+          var label = el('text', {x: marginL - 8, y: y + 4, 'text-anchor': 'end', 'class': 'chart-tick-label'});
+          label.textContent = val;
+          svg.appendChild(label);
+        });
+
+        weeks.forEach(function(w, i){
+          var label = el('text', {x: xAt(i), y: H - marginB + 20, 'text-anchor': 'middle', 'class': 'chart-tick-label'});
+          label.textContent = 'Wk ' + w;
+          svg.appendChild(label);
+        });
+
+        series.forEach(function(s){
+          var pts = s.points.map(function(val, i){ return xAt(i) + ',' + yAt(val); }).join(' ');
+          svg.appendChild(el('polyline', {
+            points: pts, fill: 'none', stroke: s.color, 'stroke-width': 2,
+            'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'vector-effect': 'non-scaling-stroke'
+          }));
+          var lastI = s.points.length - 1;
+          svg.appendChild(el('circle', {
+            cx: xAt(lastI), cy: yAt(s.points[lastI]), r: 4, fill: s.color,
+            stroke: 'var(--card)', 'stroke-width': 2
+          }));
+        });
+
+        series.forEach(function(s){
+          var item = document.createElement('div');
+          item.className = 'lkey';
+          var sw = document.createElement('span');
+          sw.className = 'swatch';
+          sw.style.background = s.color;
+          var nm = document.createElement('span');
+          nm.textContent = s.name;
+          item.appendChild(sw);
+          item.appendChild(nm);
+          legendEl.appendChild(item);
+        });
+
+        var crosshair = el('line', {x1: 0, x2: 0, y1: marginT, y2: marginT + plotH, stroke: 'var(--line)', 'stroke-width': 1, 'vector-effect': 'non-scaling-stroke'});
+        crosshair.style.display = 'none';
+        svg.appendChild(crosshair);
+
+        function nearestIndex(px){
+          var best = 0, bestDist = Infinity;
+          weeks.forEach(function(w, i){
+            var d = Math.abs(xAt(i) - px);
+            if (d < bestDist){ bestDist = d; best = i; }
+          });
+          return best;
+        }
+
+        function showTooltip(i, clientX, clientY){
+          crosshair.style.display = '';
+          crosshair.setAttribute('x1', xAt(i));
+          crosshair.setAttribute('x2', xAt(i));
+
+          tooltip.innerHTML = '';
+          var weekEl = document.createElement('div');
+          weekEl.className = 'tt-week';
+          weekEl.textContent = 'Week ' + weeks[i];
+          tooltip.appendChild(weekEl);
+
+          var ranked = series.slice().sort(function(a, b){ return b.points[i] - a.points[i]; });
+          ranked.forEach(function(s){
+            var row = document.createElement('div');
+            row.className = 'tt-row';
+            var key = document.createElement('span');
+            key.className = 'tt-key';
+            key.style.background = s.color;
+            var name = document.createElement('span');
+            name.className = 'tt-name';
+            name.textContent = s.name;
+            var valEl = document.createElement('span');
+            valEl.className = 'tt-val';
+            valEl.textContent = s.points[i];
+            row.appendChild(key);
+            row.appendChild(name);
+            row.appendChild(valEl);
+            tooltip.appendChild(row);
+          });
+
+          tooltip.hidden = false;
+          var boxRect = box.getBoundingClientRect();
+          var left = clientX - boxRect.left + 14;
+          var top = clientY - boxRect.top - 10;
+          if (left + 160 > boxRect.width) left = clientX - boxRect.left - 174;
+          tooltip.style.left = left + 'px';
+          tooltip.style.top = Math.max(0, top) + 'px';
+        }
+
+        function hideTooltip(){
+          crosshair.style.display = 'none';
+          tooltip.hidden = true;
+        }
+
+        svg.addEventListener('pointermove', function(e){
+          var rect = svg.getBoundingClientRect();
+          var px = ((e.clientX - rect.left) / rect.width) * W;
+          showTooltip(nearestIndex(px), e.clientX, e.clientY);
+        });
+        svg.addEventListener('pointerleave', hideTooltip);
+      })();
+    </script>
+    {% endif %}
+
     <div style="overflow-x:auto;">
     <table class="hist">
       <thead>
@@ -202,6 +364,31 @@
       </tbody>
     </table>
     </div>
+
+    <div class="section-title">Rules &amp; Scoring</div>
+    <div class="section-sub">Before the season, each bettor picked a 1st-through-4th finish order for all 8 divisions. Locked in — no changes once the season starts.</div>
+    <table class="dt" style="margin-bottom:14px;">
+      <thead><tr><th>Rule</th><th style="text-align:right;">Points</th></tr></thead>
+      <tbody>
+        <tr><td>Exact position (1–4) correct, per team</td><td style="text-align:right; font-weight:700; color:var(--accent-afc);">+3</td></tr>
+        <tr><td>Perfect division (all 4 exact)</td><td style="text-align:right; font-weight:700; color:var(--accent-afc);">+8</td></tr>
+        <tr><td>Top-2 in exact order</td><td style="text-align:right; font-weight:700; color:var(--accent-afc);">+3</td></tr>
+        <tr><td>Bottom-2 in exact order</td><td style="text-align:right; font-weight:700; color:var(--accent-afc);">+2</td></tr>
+      </tbody>
+    </table>
+    <div class="legend" style="margin-bottom:18px;">
+      <span>Division max 25</span>
+      <span>Season max 200</span>
+    </div>
+    <div class="section-sub" style="margin-bottom:6px;"><strong style="color:var(--ink);">Tiebreakers, in order:</strong></div>
+    <ol style="margin:0 0 4px; padding-left:20px; color:var(--ink); font-size:.9rem; line-height:1.8;">
+      <li>Most perfect divisions</li>
+      <li>Most top-2-in-order bonuses</li>
+      <li>Most bottom-2-in-order bonuses</li>
+      <li>Most total exact hits (out of 32)</li>
+      <li>Closest guess to a designated week's total points{% if not tiebreaker.designated_week %} <span style="color:var(--muted);">(not set up yet)</span>{% endif %}</li>
+      <li>Coin flip</li>
+    </ol>
 
     <div class="footnote">
       Picks were locked before the season and never change — only Yahoo Sports' real standings move week to week. Standings sourced from

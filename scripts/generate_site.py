@@ -14,7 +14,7 @@ from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader
 
-from _common import load_json, sync_assets, team_lookup
+from _common import bettor_colors, load_json, sync_assets, team_lookup
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT / "data"
@@ -132,9 +132,19 @@ def main():
         for bid, b in wk_scores["bettors"].items():
             by_bettor_week[bid][wk] = b["total"]
 
+    colors = bettor_colors(bettors_data)
     history = []
+    chart_series = []
     for bettor in bettors_data["bettors"]:
-        history.append({"name": bettor["name"], "by_week": by_bettor_week[bettor["id"]]})
+        by_week = by_bettor_week[bettor["id"]]
+        history.append({"name": bettor["name"], "by_week": by_week, "color": colors[bettor["id"]]})
+        chart_series.append(
+            {
+                "name": bettor["name"],
+                "color": colors[bettor["id"]],
+                "points": [by_week[w] for w in history_weeks],
+            }
+        )
 
     env = Environment(loader=FileSystemLoader(str(TEMPLATES_DIR)), autoescape=True)
     template = env.get_template("index.html.j2")
@@ -152,6 +162,7 @@ def main():
         division_breakdown=division_breakdown,
         history_weeks=history_weeks,
         history=history,
+        chart_series=chart_series,
         tiebreaker=tiebreaker_data,
         unresolved_ties=scores.get("unresolved_ties", []),
         standings_source_url=standings["source_url"],

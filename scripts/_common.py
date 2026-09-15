@@ -40,3 +40,28 @@ def sync_assets(site_dir: Path) -> None:
     dest = site_dir / "assets"
     if ASSETS_DIR.exists():
         shutil.copytree(ASSETS_DIR, dest, dirs_exist_ok=True)
+
+
+# Categorical palette validated for the site's dark navy chart surface
+# (data-viz skill's default order, first 7 slots -- worst adjacent CVD
+# Delta E 8.4, worst adjacent normal-vision Delta E 19.3, all >=3:1 contrast
+# against #131a2b). Assigned to bettors in a fixed order (their position in
+# bettors.json), never by rank, so a color always means the same person
+# week to week even as the leaderboard reshuffles.
+CHART_PALETTE = [
+    "#3987e5",  # blue
+    "#d95926",  # orange
+    "#199e70",  # aqua
+    "#c98500",  # yellow
+    "#d55181",  # magenta
+    "#008300",  # green
+    "#9085e9",  # violet
+]
+
+
+def bettor_colors(bettors_data: dict) -> dict:
+    """bettor_id -> stable chart color, assigned by file order."""
+    colors = {}
+    for i, bettor in enumerate(bettors_data["bettors"]):
+        colors[bettor["id"]] = CHART_PALETTE[i % len(CHART_PALETTE)]
+    return colors
