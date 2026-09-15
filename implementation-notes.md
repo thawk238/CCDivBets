@@ -33,7 +33,44 @@ Plan: `C:\Users\mtome\.claude\plans\indexed-swimming-island.md`
 - [x] Main leaderboard page's small text link replaced with a large gold-bordered "Reports" button linking to the hub
 - [x] `run_weekly.py` now also runs `analyze_week.py` (deterministic) but does not auto-write or auto-publish that week's report — the commentary still needs a human/Claude pass, same pattern as the preseason report
 
+## Progress (round 4: GitHub hosting)
+
+- [x] Git initialized, connected to `github.com/thawk238/CCDivBets` (confirmed public; user opted to keep it public)
+- [x] `.gitignore` (excludes `site/` -- build output, not source), `requirements.txt`
+- [x] `.github/workflows/weekly-update.yml` -- Tuesday 13:00 UTC cron (~9AM ET, drifts an hour after DST ends in Nov) + manual `workflow_dispatch`; runs the pipeline, commits `data/` back, deploys `site/` to GitHub Pages
+- [x] Pushed, manually triggered once to verify -- caught and fixed a real bug (see Deviations): the deploy only ever included `index.html`, so `preseason.html`/`reports.html`/`reports/week-01.html` 404'd live even though they worked locally
+- [x] Live at `https://thawk238.github.io/CCDivBets/`, confirmed all pages load post-fix
+
 ## Deviations
+
+- **Found:** `run_weekly.py` only ever called `generate_site.py`, never
+  `generate_preseason.py` / `generate_week_report.py` / `generate_reports_hub.py`.
+  This worked locally by accident, because I'd run those other generators
+  by hand earlier in the session and the output sat in the (gitignored)
+  local `site/` folder. The Action's deploy starts from a clean checkout
+  and only builds what the pipeline script actually runs, so it uploaded
+  an `index.html`-only site -- the other three pages 404'd live on first
+  deploy. **Chose:** made `generate_week_report.py` support `--all` (render
+  every week with a write-up, not just the latest), and made
+  `run_weekly.py` always rebuild the entire site -- index, preseason,
+  every existing week report, and the hub -- every run. **Why:** a Pages
+  deploy replaces the whole folder each time, so "only regenerate what
+  changed" is the wrong mental model here; everything with committed
+  source data has to be rebuilt every run or it silently disappears.
+  Caught by actually checking the live deployed URLs, not just the local
+  build.
+
+- **Found:** after the Action's first run committed a fresh scrape back to
+  `main`, my next local `git push` was rejected (diverged history), and
+  rebasing hit a real conflict on `data/standings/2026-wk01.json` /
+  `data/scores/2026-wk01.json` -- both the Action and a local test run had
+  re-scraped the same live data minutes apart. **Chose:** kept the Action's
+  (remote) version of both files during the rebase, since it's the
+  authoritative automated run. **Why/how to apply:** this will recur any
+  time a local pipeline run and the Action both touch `data/standings/` or
+  `data/scores/` around the same time -- `git fetch` before running the
+  pipeline locally once the Action is live, to avoid the conflict rather
+  than resolve it after the fact.
 
 - **Found:** the auto-computed week number was wrong (labeled "Week 2" when
   it should've been "Week 1") — I'd guessed the 2026 season opener as
