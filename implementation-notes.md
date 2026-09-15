@@ -41,6 +41,14 @@ Plan: `C:\Users\mtome\.claude\plans\indexed-swimming-island.md`
 - [x] Pushed, manually triggered once to verify -- caught and fixed a real bug (see Deviations): the deploy only ever included `index.html`, so `preseason.html`/`reports.html`/`reports/week-01.html` 404'd live even though they worked locally
 - [x] Live at `https://thawk238.github.io/CCDivBets/`, confirmed all pages load post-fix
 
+## Progress (round 5: Rules & Scoring section + points-by-week chart)
+
+- [x] "Rules & Scoring" section added to the bottom of `index.html.j2` (mirrors the README)
+- [x] `scripts/_common.py`: `CHART_PALETTE` + `bettor_colors()` -- data-viz skill's validated categorical palette (7 slots), checked with `validate_palette.js --mode dark --surface #131a2b` (the site's actual card color, not the skill's default dark surface) -- all checks passed
+- [x] `generate_site.py` now assigns each bettor a stable color (by file order, not by rank -- color always means the same person even as the leaderboard reshuffles) and passes `chart_series` to the template
+- [x] Hand-rolled inline SVG line chart in `index.html.j2` (no charting library, consistent with the rest of the site's zero-external-JS-dependency approach): gridlines, y-axis ticks, 2px rounded lines, end-dot markers with surface-color ring, a line-key legend, and a hover crosshair + tooltip listing every bettor's value at the hovered week, sorted by value
+- [x] Chart only renders when `history_weeks|length >= 2`, per the request ("once we get to week 2") -- verified hidden at 1 week, then verified it actually renders and the tooltip/crosshair work using a temporary synthetic 2nd week (`data/scores/2026-wk02-TEST.json`, deleted before committing -- never part of history)
+
 ## Deviations
 
 - **Found:** `run_weekly.py` only ever called `generate_site.py`, never
