@@ -7,9 +7,12 @@ scores everyone against those standings, keeps a full history, and publishes a s
 
 **Live site:** https://thawk238.github.io/CCDivBets/
 
-## How scoring works
+## Rules & scoring
 
-Per division, per bettor:
+**The pick:** Before the season, each bettor picks a 1st-through-4th finish order for all
+8 NFL divisions. Locked in -- no changes once the season starts.
+
+**Scoring (per division):**
 
 | Rule | Points |
 |---|---|
@@ -18,11 +21,18 @@ Per division, per bettor:
 | Top-2 in exact order | +3 bonus |
 | Bottom-2 in exact order | +2 bonus |
 
-Division max: 4×3 + 8+3+2 = **25**. Season max (8 divisions): **200**.
+Division max: 4×3 + 8 + 3 + 2 = **25**. Season max (8 divisions): 8×25 = **200**.
 
-Tiebreakers, in order: most perfect divisions → most top-2 bonuses → most bottom-2 bonuses →
-most total exact hits (out of 32) → a season-long point-total guess for a designated week
-(`data/tiebreaker.json`, not yet set) → coin flip.
+**Tiebreakers, in order:**
+
+1. Most perfect divisions
+2. Most top-2-in-order bonuses
+3. Most bottom-2-in-order bonuses
+4. Most total exact hits (out of 32)
+5. Closest guess to a designated week's total points (`data/tiebreaker.json` -- not set up yet)
+6. Coin flip
+
+Standings are based on Yahoo Sports' real NFL division standings, updated weekly.
 
 ## Project layout
 
