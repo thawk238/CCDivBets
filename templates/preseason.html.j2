@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ title }} — {{ pool_name }}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&display=swap">
+<style>
+  :root{
+    --surface:#131a2b; --ink:#edeff5; --muted:#8993ac; --line:#232c44;
+    --accent-afc:#ff5a48; --accent-nfc:#3e7bff; --gold:#ffc94a;
+    --card:#0f1523; --chipbg:#1b2338; --bg:#0b0f1a;
+    --font-display:'Anton',sans-serif; --font-body:'Barlow',sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{background:var(--bg); color:var(--ink); font-family:var(--font-body); margin:0; padding:20px 16px 60px;}
+  .wrap{max-width:820px; margin:0 auto;}
+
+  .board{border-radius:16px; padding:clamp(16px,3vw,32px); background:linear-gradient(180deg,var(--surface),var(--card));}
+  .backlink{display:inline-block; color:var(--muted); font-size:.78rem; font-weight:600; text-decoration:none; margin-bottom:16px;}
+  .backlink:hover{color:var(--ink);}
+  .backlink::before{content:"← "; }
+
+  h1{font-family:var(--font-display); font-weight:400; text-transform:uppercase; letter-spacing:.01em; font-size:2.1rem; line-height:1; margin:0 0 8px;}
+  .subtitle{color:var(--gold); font-size:1rem; font-weight:600; margin:0 0 22px;}
+
+  .intro p{font-size:1.02rem; line-height:1.65; color:var(--ink); margin:0 0 14px;}
+
+  .locks{display:flex; flex-wrap:wrap; gap:8px; margin:20px 0 28px;}
+  .lockchip{display:flex; align-items:center; gap:7px; background:var(--card); border:1px solid var(--line); border-radius:20px; padding:6px 12px 6px 6px; font-size:.78rem;}
+  .lockchip .badge{width:24px; height:24px; border-radius:6px; display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,.06); flex-shrink:0; padding:2px;}
+  .lockchip .badge img{width:100%; height:100%; object-fit:contain;}
+  .lockchip .desc{color:var(--muted);}
+  .lockchip .desc b{color:var(--ink); font-weight:700;}
+
+  .fact{margin:26px 0;}
+  .fact h2{font-family:var(--font-display); font-weight:400; text-transform:uppercase; letter-spacing:.01em; font-size:1.25rem; color:var(--accent-afc); margin:0 0 8px;}
+  .fact p{font-size:.96rem; line-height:1.65; color:var(--ink); margin:0 0 10px;}
+
+  .section-title{font-family:var(--font-display); font-weight:400; text-transform:uppercase; letter-spacing:.01em; font-size:1.4rem; margin:34px 0 4px;}
+  .section-sub{color:var(--muted); font-size:.85rem; margin:0 0 18px;}
+
+  .profile{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px 18px; margin-bottom:12px;}
+  .profile .pname{font-family:var(--font-display); font-weight:400; font-size:1.15rem; color:var(--gold); text-transform:uppercase; letter-spacing:.01em; margin-bottom:2px; display:flex; align-items:center; gap:8px;}
+  .profile .tag{font-size:.62rem; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); background:var(--chipbg); border-radius:20px; padding:3px 9px;}
+  .profile p{font-size:.92rem; line-height:1.6; color:var(--ink); margin:8px 0 0;}
+
+  .closing{margin-top:34px; padding-top:18px; border-top:1px solid var(--line); color:var(--muted); font-size:.85rem; line-height:1.6; font-style:italic;}
+
+  @media (max-width:480px){
+    h1{font-size:1.6rem;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="board">
+    <a class="backlink" href="index.html">Back to leaderboard</a>
+    <h1>{{ title }}</h1>
+    <p class="subtitle">{{ subtitle }}</p>
+
+    <div class="intro">
+      {% for p in intro_paragraphs %}<p>{{ p }}</p>{% endfor %}
+    </div>
+
+    <div class="locks">
+      {% for slot in locked_slots %}
+      <div class="lockchip">
+        <span class="badge"><img src="{{ slot.team.logo }}" alt="{{ slot.team.name }}" title="{{ slot.team.name }}"></span>
+        <span class="desc"><b>{{ slot.team.name }}</b> {{ slot.slot_label }} · {{ slot.division_name }}</span>
+      </div>
+      {% endfor %}
+    </div>
+
+    {% for f in fun_facts %}
+    <div class="fact">
+      <h2>{{ f.heading }}</h2>
+      {% for para in f.body_paragraphs %}<p>{{ para }}</p>{% endfor %}
+    </div>
+    {% endfor %}
+
+    <div class="section-title">The Book on Everybody</div>
+    <div class="section-sub">Ranked by how often they broke from the room — biggest contrarian first.</div>
+
+    {% for b in bettor_profiles %}
+    <div class="profile">
+      <div class="pname">{{ b.name }} <span class="tag">{{ b.lone_wolf_count }} lone-wolf pick{{ 's' if b.lone_wolf_count != 1 else '' }}</span></div>
+      <p>{{ b.body }}</p>
+    </div>
+    {% endfor %}
+
+    <div class="closing">{{ closing_paragraph }}</div>
+  </div>
+</div>
+</body>
+</html>

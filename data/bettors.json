@@ -1,0 +1,32 @@
+{
+  "bettors": [
+    {
+      "id": "bettor-1",
+      "name": "Mike T"
+    },
+    {
+      "id": "bettor-2",
+      "name": "Dilger"
+    },
+    {
+      "id": "bettor-3",
+      "name": "Dustin"
+    },
+    {
+      "id": "bettor-4",
+      "name": "Tom"
+    },
+    {
+      "id": "bettor-5",
+      "name": "Hume"
+    },
+    {
+      "id": "bettor-6",
+      "name": "Cadegn"
+    },
+    {
+      "id": "bettor-7",
+      "name": "Farmer"
+    }
+  ]
+}

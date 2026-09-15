@@ -1,0 +1,5 @@
+{
+  "_note": "Tiebreaker #5: closest total-point guess for a designated week. Not set up yet -- inert until designated_week is filled in. Only consulted if tiebreakers #1-4 (perfect divisions, top-2 bonuses, bottom-2 bonuses, total exact hits) are still tied.",
+  "designated_week": null,
+  "guesses": {}
+}

@@ -1,0 +1,55 @@
+name: Weekly Update
+
+# Tuesday 9:00 AM Eastern, approximated. GitHub Actions cron is UTC-only and
+# doesn't shift for US daylight saving, so this drifts by an hour for part
+# of the season: 13:00 UTC is 9:00 AM EDT (Sept-early Nov) / 8:00 AM EST
+# (Nov-Jan). Adjust the cron line below, or just re-run manually via the
+# "Run workflow" button, if the exact hour matters.
+on:
+  schedule:
+    - cron: "0 13 * * 2"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install -r requirements.txt
+
+      - name: Run the weekly pipeline (scrape -> compute -> generate -> analyze)
+        run: python scripts/run_weekly.py
+
+      - name: Commit updated data back to the repo
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/
+          git diff --cached --quiet || git commit -m "Weekly update: $(date -u +'%Y-%m-%d')"
+          git push
+
+      - name: Upload site as a Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

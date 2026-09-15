@@ -1,0 +1,356 @@
+{
+  "_sample_data": false,
+  "_note": "Locked pool picks, entered via scripts/entry_form.py.",
+  "picks": {
+    "bettor-1": {
+      "afc-north": [
+        "BAL",
+        "CIN",
+        "PIT",
+        "CLE"
+      ],
+      "afc-south": [
+        "HOU",
+        "JAX",
+        "IND",
+        "TEN"
+      ],
+      "afc-east": [
+        "BUF",
+        "NE",
+        "NYJ",
+        "MIA"
+      ],
+      "afc-west": [
+        "KC",
+        "DEN",
+        "LAC",
+        "LV"
+      ],
+      "nfc-north": [
+        "DET",
+        "GB",
+        "CHI",
+        "MIN"
+      ],
+      "nfc-south": [
+        "TB",
+        "NO",
+        "CAR",
+        "ATL"
+      ],
+      "nfc-east": [
+        "PHI",
+        "DAL",
+        "WAS",
+        "NYG"
+      ],
+      "nfc-west": [
+        "LAR",
+        "SEA",
+        "SF",
+        "ARI"
+      ]
+    },
+    "bettor-2": {
+      "afc-north": [
+        "CIN",
+        "BAL",
+        "PIT",
+        "CLE"
+      ],
+      "afc-south": [
+        "HOU",
+        "JAX",
+        "IND",
+        "TEN"
+      ],
+      "afc-east": [
+        "BUF",
+        "NE",
+        "NYJ",
+        "MIA"
+      ],
+      "afc-west": [
+        "DEN",
+        "LAC",
+        "KC",
+        "LV"
+      ],
+      "nfc-north": [
+        "DET",
+        "CHI",
+        "GB",
+        "MIN"
+      ],
+      "nfc-south": [
+        "TB",
+        "NO",
+        "CAR",
+        "ATL"
+      ],
+      "nfc-east": [
+        "PHI",
+        "NYG",
+        "WAS",
+        "DAL"
+      ],
+      "nfc-west": [
+        "LAR",
+        "SEA",
+        "SF",
+        "ARI"
+      ]
+    },
+    "bettor-3": {
+      "afc-north": [
+        "BAL",
+        "CIN",
+        "PIT",
+        "CLE"
+      ],
+      "afc-south": [
+        "HOU",
+        "JAX",
+        "IND",
+        "TEN"
+      ],
+      "afc-east": [
+        "BUF",
+        "NE",
+        "NYJ",
+        "MIA"
+      ],
+      "afc-west": [
+        "DEN",
+        "KC",
+        "LAC",
+        "LV"
+      ],
+      "nfc-north": [
+        "DET",
+        "GB",
+        "CHI",
+        "MIN"
+      ],
+      "nfc-south": [
+        "NO",
+        "TB",
+        "ATL",
+        "CAR"
+      ],
+      "nfc-east": [
+        "DAL",
+        "PHI",
+        "NYG",
+        "WAS"
+      ],
+      "nfc-west": [
+        "LAR",
+        "SEA",
+        "SF",
+        "ARI"
+      ]
+    },
+    "bettor-4": {
+      "afc-north": [
+        "BAL",
+        "CIN",
+        "PIT",
+        "CLE"
+      ],
+      "afc-south": [
+        "HOU",
+        "JAX",
+        "IND",
+        "TEN"
+      ],
+      "afc-east": [
+        "BUF",
+        "NE",
+        "NYJ",
+        "MIA"
+      ],
+      "afc-west": [
+        "LAC",
+        "DEN",
+        "KC",
+        "LV"
+      ],
+      "nfc-north": [
+        "DET",
+        "CHI",
+        "GB",
+        "MIN"
+      ],
+      "nfc-south": [
+        "NO",
+        "TB",
+        "CAR",
+        "ATL"
+      ],
+      "nfc-east": [
+        "PHI",
+        "NYG",
+        "DAL",
+        "WAS"
+      ],
+      "nfc-west": [
+        "LAR",
+        "SEA",
+        "SF",
+        "ARI"
+      ]
+    },
+    "bettor-5": {
+      "afc-north": [
+        "CIN",
+        "BAL",
+        "PIT",
+        "CLE"
+      ],
+      "afc-south": [
+        "HOU",
+        "JAX",
+        "IND",
+        "TEN"
+      ],
+      "afc-east": [
+        "BUF",
+        "NE",
+        "NYJ",
+        "MIA"
+      ],
+      "afc-west": [
+        "KC",
+        "DEN",
+        "LAC",
+        "LV"
+      ],
+      "nfc-north": [
+        "DET",
+        "MIN",
+        "GB",
+        "CHI"
+      ],
+      "nfc-south": [
+        "TB",
+        "NO",
+        "ATL",
+        "CAR"
+      ],
+      "nfc-east": [
+        "PHI",
+        "DAL",
+        "NYG",
+        "WAS"
+      ],
+      "nfc-west": [
+        "LAR",
+        "SEA",
+        "SF",
+        "ARI"
+      ]
+    },
+    "bettor-6": {
+      "afc-north": [
+        "CIN",
+        "BAL",
+        "PIT",
+        "CLE"
+      ],
+      "afc-south": [
+        "JAX",
+        "HOU",
+        "IND",
+        "TEN"
+      ],
+      "afc-east": [
+        "BUF",
+        "NE",
+        "NYJ",
+        "MIA"
+      ],
+      "afc-west": [
+        "DEN",
+        "KC",
+        "LAC",
+        "LV"
+      ],
+      "nfc-north": [
+        "DET",
+        "CHI",
+        "GB",
+        "MIN"
+      ],
+      "nfc-south": [
+        "TB",
+        "CAR",
+        "ATL",
+        "NO"
+      ],
+      "nfc-east": [
+        "NYG",
+        "PHI",
+        "DAL",
+        "WAS"
+      ],
+      "nfc-west": [
+        "LAR",
+        "SF",
+        "SEA",
+        "ARI"
+      ]
+    },
+    "bettor-7": {
+      "afc-north": [
+        "CIN",
+        "BAL",
+        "PIT",
+        "CLE"
+      ],
+      "afc-south": [
+        "JAX",
+        "HOU",
+        "TEN",
+        "IND"
+      ],
+      "afc-east": [
+        "BUF",
+        "NE",
+        "MIA",
+        "NYJ"
+      ],
+      "afc-west": [
+        "DEN",
+        "LAC",
+        "KC",
+        "LV"
+      ],
+      "nfc-north": [
+        "DET",
+        "CHI",
+        "GB",
+        "MIN"
+      ],
+      "nfc-south": [
+        "TB",
+        "ATL",
+        "CAR",
+        "NO"
+      ],
+      "nfc-east": [
+        "DAL",
+        "NYG",
+        "PHI",
+        "WAS"
+      ],
+      "nfc-west": [
+        "LAR",
+        "SEA",
+        "SF",
+        "ARI"
+      ]
+    }
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "season": 2026,
+  "divisions": [
+    {
+      "id": "afc-north",
+      "name": "AFC North",
+      "conference": "AFC",
+      "teams": [
+        { "id": "BAL", "name": "Ravens",   "yahoo_city": "Baltimore",   "color": "#241773" },
+        { "id": "CIN", "name": "Bengals",  "yahoo_city": "Cincinnati",  "color": "#FB4F14" },
+        { "id": "CLE", "name": "Browns",   "yahoo_city": "Cleveland",   "color": "#311D00" },
+        { "id": "PIT", "name": "Steelers", "yahoo_city": "Pittsburgh",  "color": "#FFB612" }
+      ]
+    },
+    {
+      "id": "afc-south",
+      "name": "AFC South",
+      "conference": "AFC",
+      "teams": [
+        { "id": "HOU", "name": "Texans",  "yahoo_city": "Houston",       "color": "#03202F" },
+        { "id": "IND", "name": "Colts",   "yahoo_city": "Indianapolis",  "color": "#002C5F" },
+        { "id": "JAX", "name": "Jaguars", "yahoo_city": "Jacksonville",  "color": "#006778" },
+        { "id": "TEN", "name": "Titans",  "yahoo_city": "Tennessee",     "color": "#4B92DB" }
+      ]
+    },
+    {
+      "id": "afc-east",
+      "name": "AFC East",
+      "conference": "AFC",
+      "teams": [
+        { "id": "BUF", "name": "Bills",    "yahoo_city": "Buffalo",     "color": "#00338D" },
+        { "id": "MIA", "name": "Dolphins", "yahoo_city": "Miami",       "color": "#008E97" },
+        { "id": "NE",  "name": "Patriots", "yahoo_city": "New England", "color": "#002244" },
+        { "id": "NYJ", "name": "Jets",     "yahoo_city": "NY Jets",     "color": "#125740" }
+      ]
+    },
+    {
+      "id": "afc-west",
+      "name": "AFC West",
+      "conference": "AFC",
+      "teams": [
+        { "id": "DEN", "name": "Broncos",  "yahoo_city": "Denver",      "color": "#FB4F14" },
+        { "id": "KC",  "name": "Chiefs",   "yahoo_city": "Kansas City", "color": "#E31837" },
+        { "id": "LV",  "name": "Raiders",  "yahoo_city": "Las Vegas",   "color": "#000000" },
+        { "id": "LAC", "name": "Chargers", "yahoo_city": "LA Chargers", "color": "#0080C6" }
+      ]
+    },
+    {
+      "id": "nfc-north",
+      "name": "NFC North",
+      "conference": "NFC",
+      "teams": [
+        { "id": "CHI", "name": "Bears",    "yahoo_city": "Chicago",   "color": "#0B162A" },
+        { "id": "DET", "name": "Lions",    "yahoo_city": "Detroit",   "color": "#0076B6" },
+        { "id": "GB",  "name": "Packers",  "yahoo_city": "Green Bay", "color": "#203731" },
+        { "id": "MIN", "name": "Vikings",  "yahoo_city": "Minnesota", "color": "#4F2683" }
+      ]
+    },
+    {
+      "id": "nfc-south",
+      "name": "NFC South",
+      "conference": "NFC",
+      "teams": [
+        { "id": "ATL", "name": "Falcons",     "yahoo_city": "Atlanta",     "color": "#A71930" },
+        { "id": "CAR", "name": "Panthers",    "yahoo_city": "Carolina",    "color": "#0085CA" },
+        { "id": "NO",  "name": "Saints",      "yahoo_city": "New Orleans", "color": "#D3BC8D" },
+        { "id": "TB",  "name": "Buccaneers",  "yahoo_city": "Tampa Bay",   "color": "#D50A0A" }
+      ]
+    },
+    {
+      "id": "nfc-east",
+      "name": "NFC East",
+      "conference": "NFC",
+      "teams": [
+        { "id": "DAL", "name": "Cowboys",    "yahoo_city": "Dallas",       "color": "#041E42" },
+        { "id": "NYG", "name": "Giants",     "yahoo_city": "NY Giants",    "color": "#0B2265" },
+        { "id": "PHI", "name": "Eagles",     "yahoo_city": "Philadelphia", "color": "#004C54" },
+        { "id": "WAS", "name": "Commanders", "yahoo_city": "Washington",   "color": "#5A1414" }
+      ]
+    },
+    {
+      "id": "nfc-west",
+      "name": "NFC West",
+      "conference": "NFC",
+      "teams": [
+        { "id": "ARI", "name": "Cardinals", "yahoo_city": "Arizona",       "color": "#97233F" },
+        { "id": "LAR", "name": "Rams",      "yahoo_city": "LA Rams",       "color": "#003594" },
+        { "id": "SF",  "name": "49ers",     "yahoo_city": "San Francisco", "color": "#AA0000" },
+        { "id": "SEA", "name": "Seahawks",  "yahoo_city": "Seattle",       "color": "#002244" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ pool_name }} — Divisional Bets</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&display=swap">
+<style>
+  :root{
+    --surface:#131a2b; --ink:#edeff5; --muted:#8993ac; --line:#232c44;
+    --accent-afc:#ff5a48; --accent-nfc:#3e7bff; --gold:#ffc94a;
+    --card:#0f1523; --chipbg:#1b2338; --leaderbg:#1d1408; --bg:#0b0f1a;
+    --font-display:'Anton',sans-serif; --font-body:'Barlow',sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{background:var(--bg); color:var(--ink); font-family:var(--font-body); margin:0; padding:20px 16px 60px;}
+  .wrap{max-width:1180px; margin:0 auto;}
+
+  .board{border-radius:16px; padding:clamp(16px,3vw,32px); background:linear-gradient(180deg,var(--surface),var(--card));}
+  .board-head{display:flex; justify-content:space-between; align-items:flex-end; gap:16px; flex-wrap:wrap; margin-bottom:22px; padding-bottom:16px; border-bottom:1px solid var(--line);}
+  .board-head .pool{font-family:var(--font-display); font-weight:400; text-transform:uppercase; letter-spacing:.01em; font-size:2.3rem; line-height:1;}
+  .board-head .pool span{color:var(--accent-nfc);}
+  .board-head .meta{text-align:right;}
+  .board-head .week{color:var(--muted); font-size:.85rem; font-weight:600; text-transform:uppercase; letter-spacing:.08em;}
+  .board-head .updated{color:var(--muted); font-size:.72rem; margin-top:3px;}
+
+  .reports-cta{display:flex; flex-direction:column; gap:3px; background:linear-gradient(120deg,var(--card),#171f34); border:1px solid var(--gold); border-radius:14px; padding:18px 22px; margin-bottom:26px; text-decoration:none; transition:border-color .15s, transform .1s;}
+  .reports-cta:hover{transform:translateY(-1px);}
+  .reports-cta .cta-label{font-family:var(--font-display); font-weight:400; text-transform:uppercase; letter-spacing:.02em; font-size:1.6rem; color:var(--gold);}
+  .reports-cta .cta-sub{color:var(--ink); font-size:.85rem; opacity:.85;}
+
+  .lb{width:100%; border-collapse:collapse; font-variant-numeric:tabular-nums;}
+  .lb th{text-align:left; font-size:.72rem; text-transform:uppercase; letter-spacing:.07em; color:var(--muted); font-weight:700; padding:0 10px 10px; border-bottom:1px solid var(--line);}
+  .lb td{padding:11px 10px; border-bottom:1px solid var(--line); font-size:.92rem;}
+  .lb tr:last-child td{border-bottom:none;}
+  .lb th:not(:first-child), .lb td:not(:first-child){text-align:center;}
+  .lb th:nth-child(2), .lb td:nth-child(2){text-align:left;}
+  .rank{font-family:var(--font-display); font-weight:400; font-size:1.1rem; color:var(--muted);}
+  .rank.lead{color:var(--gold);}
+  .name{font-weight:600;}
+  .total{font-family:var(--font-display); font-weight:400; font-size:1.15rem; color:var(--accent-afc);}
+  .lb tr.leader{background:var(--leaderbg);}
+  .lb tr.leader .total{color:var(--gold);}
+  .tiegroup{border-left:2px solid var(--gold);}
+
+  .section-title{font-family:var(--font-display); font-weight:400; font-size:1.4rem; text-transform:uppercase; letter-spacing:.01em; margin:30px 0 4px;}
+  .section-sub{color:var(--muted); font-size:.85rem; margin:0 0 16px;}
+
+  .legend{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:18px;}
+  .legend span{font-size:.72rem; font-weight:600; padding:5px 10px; border-radius:20px; background:var(--chipbg); color:var(--muted); border:1px solid var(--line);}
+
+  .tabs{display:flex; gap:6px; flex-wrap:wrap; margin:18px 0 18px; border-bottom:1px solid var(--line);}
+  .tab{cursor:pointer; border:none; background:none; font-family:var(--font-body); font-weight:600; font-size:.82rem; color:var(--muted); padding:9px 10px; border-bottom:3px solid transparent;}
+  .tab:hover{color:var(--ink);}
+  .tab[aria-selected="true"]{color:var(--ink); border-bottom-color:var(--accent-afc);}
+  .divpanel{display:none;}
+  .divpanel.active{display:block;}
+
+  .actual-row{display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin-bottom:18px; padding:14px 16px; background:var(--card); border:1px solid var(--line); border-radius:12px;}
+  .actual-team{display:flex; align-items:center; gap:8px;}
+  .actual-team .rankno{font-family:var(--font-display); color:var(--muted); font-size:.9rem; width:16px;}
+  .actual-team .rec{font-size:.68rem; color:var(--muted);}
+
+  .dt{width:100%; border-collapse:collapse;}
+  .dt th{text-align:left; font-size:.7rem; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); font-weight:700; padding:0 8px 8px; border-bottom:1px solid var(--line);}
+  .dt td{padding:9px 8px; border-bottom:1px solid var(--line); font-size:.85rem; vertical-align:middle;}
+  .dt tr:last-child td{border-bottom:none;}
+  .dt .picks{display:flex; gap:5px;}
+  .dt .divtotal{font-family:var(--font-display); font-weight:400; color:var(--accent-afc); font-size:1rem; text-align:right;}
+  .dt .bonuses{display:flex; gap:4px; flex-wrap:wrap;}
+
+  .badge{width:30px; height:30px; border-radius:8px; display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,.06); flex-shrink:0; padding:3px;}
+  .badge img{width:100%; height:100%; object-fit:contain;}
+  .badge.exact{box-shadow:0 0 0 2px var(--gold);}
+  .bonuschip{font-size:.6rem; font-weight:700; padding:2px 6px; border-radius:5px; background:var(--chipbg); color:var(--muted);}
+  .bonuschip.on{background:var(--gold); color:#181206;}
+
+  .hist{width:100%; border-collapse:collapse; font-variant-numeric:tabular-nums; overflow-x:auto; display:block;}
+  .hist th, .hist td{padding:8px 10px; border-bottom:1px solid var(--line); font-size:.82rem; text-align:center; white-space:nowrap;}
+  .hist th:first-child, .hist td:first-child{text-align:left;}
+  .hist th{color:var(--muted); font-size:.68rem; text-transform:uppercase; letter-spacing:.06em;}
+
+  .footnote{margin-top:34px; padding-top:18px; border-top:1px solid var(--line); color:var(--muted); font-size:.78rem; line-height:1.6;}
+
+  @media (max-width:480px){
+    .board-head{flex-direction:column; align-items:flex-start;}
+    .board-head .meta{text-align:left;}
+    .board-head .pool{font-size:1.8rem;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="board">
+    <div class="board-head">
+      <div class="pool">{{ pool_name_line1 }} <span>{{ pool_name_line2 }}</span></div>
+      <div class="meta">
+        <div class="week">Week {{ current_week }} · {{ season }} Season</div>
+        <div class="updated">Updated {{ generated_at }}</div>
+      </div>
+    </div>
+
+    <a class="reports-cta" href="reports.html">
+      <span class="cta-label">Reports</span>
+      <span class="cta-sub">Preseason scouting report + a fresh write-up every week →</span>
+    </a>
+
+    <div class="section-title">Leaderboard</div>
+    <div class="section-sub">Tiebreak order: perfect divisions → top-2 bonuses → bottom-2 bonuses → total exact hits{% if tiebreaker.designated_week %} → Week {{ tiebreaker.designated_week }} point-total guess{% endif %}.</div>
+    <table class="lb">
+      <thead><tr><th>#</th><th>Bettor</th><th>Total</th><th>Perfect Divs</th><th>Top-2</th><th>Bot-2</th><th>Exact Hits</th></tr></thead>
+      <tbody>
+        {% for row in leaderboard %}
+        <tr class="{{ 'leader' if row.rank == 1 else '' }}{{ ' tiegroup' if row.tied else '' }}">
+          <td class="rank {{ 'lead' if row.rank == 1 else '' }}">{{ row.rank }}</td>
+          <td class="name">{{ row.name }}</td>
+          <td class="total">{{ row.total }}</td>
+          <td>{{ row.perfect_divisions_count }}</td>
+          <td>{{ row.top2_bonus_count }}</td>
+          <td>{{ row.bottom2_bonus_count }}</td>
+          <td>{{ row.total_exact_hits }} / 32</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <div class="legend">
+      <span>Exact position +3</span>
+      <span>Perfect division +8</span>
+      <span>Top-2 in order +3</span>
+      <span>Bottom-2 in order +2</span>
+      <span>Division max 25 · Season max 200</span>
+    </div>
+
+    <div class="section-title">Division breakdown</div>
+    <div class="section-sub">Actual order per Yahoo Sports standings as of the last update. Gold ring = exact position match.</div>
+
+    <div class="tabs" role="tablist">
+      {% for div in divisions %}
+      <button class="tab" data-target="div-{{ div.id }}" aria-selected="{{ 'true' if loop.first else 'false' }}">{{ div.name }}</button>
+      {% endfor %}
+    </div>
+
+    {% for div in divisions %}
+    <div class="divpanel {{ 'active' if loop.first else '' }}" id="div-{{ div.id }}">
+      <div class="actual-row">
+        {% for team in standings_by_division[div.id] %}
+        <div class="actual-team">
+          <span class="rankno">{{ loop.index }}</span>
+          <span class="badge"><img src="{{ team.logo }}" alt="{{ team.name }}" title="{{ team.name }}"></span>
+          <span class="rec">{{ team.wins }}-{{ team.losses }}{{ '-' ~ team.ties if team.ties else '' }}</span>
+        </div>
+        {% endfor %}
+      </div>
+
+      <table class="dt">
+        <thead><tr><th>Bettor</th><th>Predicted 1→4</th><th>Bonuses</th><th style="text-align:right;">Pts</th></tr></thead>
+        <tbody>
+          {% for entry in division_breakdown[div.id] %}
+          <tr>
+            <td class="name">{{ entry.name }}</td>
+            <td>
+              <div class="picks">
+                {% for team in entry.predicted_teams %}
+                <span class="badge {{ 'exact' if entry.exact_flags[loop.index0] else '' }}"><img src="{{ team.logo }}" alt="{{ team.name }}" title="{{ team.name }}"></span>
+                {% endfor %}
+              </div>
+            </td>
+            <td>
+              <div class="bonuses">
+                <span class="bonuschip {{ 'on' if entry.perfect else '' }}">Perfect +8</span>
+                <span class="bonuschip {{ 'on' if entry.top2_bonus else '' }}">Top-2 +3</span>
+                <span class="bonuschip {{ 'on' if entry.bottom2_bonus else '' }}">Bot-2 +2</span>
+              </div>
+            </td>
+            <td class="divtotal">{{ entry.division_total }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% endfor %}
+
+    <div class="section-title">Score history</div>
+    <div class="section-sub">Season-to-date total after each week's update.</div>
+    <div style="overflow-x:auto;">
+    <table class="hist">
+      <thead>
+        <tr>
+          <th>Bettor</th>
+          {% for w in history_weeks %}<th>Wk {{ w }}</th>{% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in history %}
+        <tr>
+          <td class="name">{{ row.name }}</td>
+          {% for w in history_weeks %}<td>{{ row.by_week.get(w, '—') }}</td>{% endfor %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    </div>
+
+    <div class="footnote">
+      Picks were locked before the season and never change — only Yahoo Sports' real standings move week to week. Standings sourced from
+      <a href="{{ standings_source_url }}" style="color:var(--muted);">sports.yahoo.com/nfl/standings</a>.
+      {% if unresolved_ties %}<br><strong style="color:var(--gold);">Note:</strong> tiebreakers #1–4 did not fully separate {{ unresolved_ties|length }} pair(s) this week{% if not tiebreaker.designated_week %} — tiebreaker #5 (point-total guess) isn't set up yet{% endif %}.{% endif %}
+    </div>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('.tab').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.tab').forEach(function(b){ b.setAttribute('aria-selected','false'); });
+      document.querySelectorAll('.divpanel').forEach(function(p){ p.classList.remove('active'); });
+      btn.setAttribute('aria-selected','true');
+      document.getElementById(btn.dataset.target).classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>

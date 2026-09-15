@@ -1,0 +1,10 @@
+# Generated site output -- rebuilt by the pipeline / GitHub Actions each run,
+# not source. GitHub Pages deploys this as a build artifact, not from git.
+site/
+
+# Python
+__pycache__/
+*.pyc
+
+# Local scratch
+*.pending-review.json

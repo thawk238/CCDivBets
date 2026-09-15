@@ -1,0 +1,518 @@
+{
+  "season": 2026,
+  "week": 1,
+  "has_previous_week": false,
+  "leaderboard": [
+    {
+      "bettor_id": "bettor-3",
+      "name": "Dustin",
+      "rank": 1,
+      "total": 40,
+      "delta": null
+    },
+    {
+      "bettor_id": "bettor-6",
+      "name": "Cadegn",
+      "rank": 2,
+      "total": 38,
+      "delta": null
+    },
+    {
+      "bettor_id": "bettor-1",
+      "name": "Mike T",
+      "rank": 3,
+      "total": 37,
+      "delta": null
+    },
+    {
+      "bettor_id": "bettor-7",
+      "name": "Farmer",
+      "rank": 4,
+      "total": 36,
+      "delta": null
+    },
+    {
+      "bettor_id": "bettor-4",
+      "name": "Tom",
+      "rank": 5,
+      "total": 34,
+      "delta": null
+    },
+    {
+      "bettor_id": "bettor-2",
+      "name": "Dilger",
+      "rank": 6,
+      "total": 22,
+      "delta": null
+    },
+    {
+      "bettor_id": "bettor-5",
+      "name": "Hume",
+      "rank": 7,
+      "total": 20,
+      "delta": null
+    }
+  ],
+  "gaps": [
+    {
+      "between": [
+        "Dustin",
+        "Cadegn"
+      ],
+      "gap": 2
+    },
+    {
+      "between": [
+        "Cadegn",
+        "Mike T"
+      ],
+      "gap": 1
+    },
+    {
+      "between": [
+        "Mike T",
+        "Farmer"
+      ],
+      "gap": 1
+    },
+    {
+      "between": [
+        "Farmer",
+        "Tom"
+      ],
+      "gap": 2
+    },
+    {
+      "between": [
+        "Tom",
+        "Dilger"
+      ],
+      "gap": 12
+    },
+    {
+      "between": [
+        "Dilger",
+        "Hume"
+      ],
+      "gap": 2
+    }
+  ],
+  "closest_gap": {
+    "between": [
+      "Cadegn",
+      "Mike T"
+    ],
+    "gap": 1
+  },
+  "widest_gap": {
+    "between": [
+      "Tom",
+      "Dilger"
+    ],
+    "gap": 12
+  },
+  "hopes_tracker": {
+    "bettor-1": {
+      "name": "Mike T",
+      "correct_count": 2,
+      "total": 8,
+      "correct": [
+        {
+          "division_name": "AFC North",
+          "picked_team": "Ravens",
+          "actual_team": "Ravens"
+        },
+        {
+          "division_name": "AFC West",
+          "picked_team": "Chiefs",
+          "actual_team": "Chiefs"
+        }
+      ],
+      "wrong": [
+        {
+          "division_name": "AFC South",
+          "picked_team": "Texans",
+          "actual_team": "Jaguars"
+        },
+        {
+          "division_name": "AFC East",
+          "picked_team": "Bills",
+          "actual_team": "Jets"
+        },
+        {
+          "division_name": "NFC North",
+          "picked_team": "Lions",
+          "actual_team": "Vikings"
+        },
+        {
+          "division_name": "NFC South",
+          "picked_team": "Buccaneers",
+          "actual_team": "Falcons"
+        },
+        {
+          "division_name": "NFC East",
+          "picked_team": "Eagles",
+          "actual_team": "Giants"
+        },
+        {
+          "division_name": "NFC West",
+          "picked_team": "Rams",
+          "actual_team": "49ers"
+        }
+      ]
+    },
+    "bettor-2": {
+      "name": "Dilger",
+      "correct_count": 0,
+      "total": 8,
+      "correct": [],
+      "wrong": [
+        {
+          "division_name": "AFC North",
+          "picked_team": "Bengals",
+          "actual_team": "Ravens"
+        },
+        {
+          "division_name": "AFC South",
+          "picked_team": "Texans",
+          "actual_team": "Jaguars"
+        },
+        {
+          "division_name": "AFC East",
+          "picked_team": "Bills",
+          "actual_team": "Jets"
+        },
+        {
+          "division_name": "AFC West",
+          "picked_team": "Broncos",
+          "actual_team": "Chiefs"
+        },
+        {
+          "division_name": "NFC North",
+          "picked_team": "Lions",
+          "actual_team": "Vikings"
+        },
+        {
+          "division_name": "NFC South",
+          "picked_team": "Buccaneers",
+          "actual_team": "Falcons"
+        },
+        {
+          "division_name": "NFC East",
+          "picked_team": "Eagles",
+          "actual_team": "Giants"
+        },
+        {
+          "division_name": "NFC West",
+          "picked_team": "Rams",
+          "actual_team": "49ers"
+        }
+      ]
+    },
+    "bettor-3": {
+      "name": "Dustin",
+      "correct_count": 1,
+      "total": 8,
+      "correct": [
+        {
+          "division_name": "AFC North",
+          "picked_team": "Ravens",
+          "actual_team": "Ravens"
+        }
+      ],
+      "wrong": [
+        {
+          "division_name": "AFC South",
+          "picked_team": "Texans",
+          "actual_team": "Jaguars"
+        },
+        {
+          "division_name": "AFC East",
+          "picked_team": "Bills",
+          "actual_team": "Jets"
+        },
+        {
+          "division_name": "AFC West",
+          "picked_team": "Broncos",
+          "actual_team": "Chiefs"
+        },
+        {
+          "division_name": "NFC North",
+          "picked_team": "Lions",
+          "actual_team": "Vikings"
+        },
+        {
+          "division_name": "NFC South",
+          "picked_team": "Saints",
+          "actual_team": "Falcons"
+        },
+        {
+          "division_name": "NFC East",
+          "picked_team": "Cowboys",
+          "actual_team": "Giants"
+        },
+        {
+          "division_name": "NFC West",
+          "picked_team": "Rams",
+          "actual_team": "49ers"
+        }
+      ]
+    },
+    "bettor-4": {
+      "name": "Tom",
+      "correct_count": 1,
+      "total": 8,
+      "correct": [
+        {
+          "division_name": "AFC North",
+          "picked_team": "Ravens",
+          "actual_team": "Ravens"
+        }
+      ],
+      "wrong": [
+        {
+          "division_name": "AFC South",
+          "picked_team": "Texans",
+          "actual_team": "Jaguars"
+        },
+        {
+          "division_name": "AFC East",
+          "picked_team": "Bills",
+          "actual_team": "Jets"
+        },
+        {
+          "division_name": "AFC West",
+          "picked_team": "Chargers",
+          "actual_team": "Chiefs"
+        },
+        {
+          "division_name": "NFC North",
+          "picked_team": "Lions",
+          "actual_team": "Vikings"
+        },
+        {
+          "division_name": "NFC South",
+          "picked_team": "Saints",
+          "actual_team": "Falcons"
+        },
+        {
+          "division_name": "NFC East",
+          "picked_team": "Eagles",
+          "actual_team": "Giants"
+        },
+        {
+          "division_name": "NFC West",
+          "picked_team": "Rams",
+          "actual_team": "49ers"
+        }
+      ]
+    },
+    "bettor-5": {
+      "name": "Hume",
+      "correct_count": 1,
+      "total": 8,
+      "correct": [
+        {
+          "division_name": "AFC West",
+          "picked_team": "Chiefs",
+          "actual_team": "Chiefs"
+        }
+      ],
+      "wrong": [
+        {
+          "division_name": "AFC North",
+          "picked_team": "Bengals",
+          "actual_team": "Ravens"
+        },
+        {
+          "division_name": "AFC South",
+          "picked_team": "Texans",
+          "actual_team": "Jaguars"
+        },
+        {
+          "division_name": "AFC East",
+          "picked_team": "Bills",
+          "actual_team": "Jets"
+        },
+        {
+          "division_name": "NFC North",
+          "picked_team": "Lions",
+          "actual_team": "Vikings"
+        },
+        {
+          "division_name": "NFC South",
+          "picked_team": "Buccaneers",
+          "actual_team": "Falcons"
+        },
+        {
+          "division_name": "NFC East",
+          "picked_team": "Eagles",
+          "actual_team": "Giants"
+        },
+        {
+          "division_name": "NFC West",
+          "picked_team": "Rams",
+          "actual_team": "49ers"
+        }
+      ]
+    },
+    "bettor-6": {
+      "name": "Cadegn",
+      "correct_count": 2,
+      "total": 8,
+      "correct": [
+        {
+          "division_name": "AFC South",
+          "picked_team": "Jaguars",
+          "actual_team": "Jaguars"
+        },
+        {
+          "division_name": "NFC East",
+          "picked_team": "Giants",
+          "actual_team": "Giants"
+        }
+      ],
+      "wrong": [
+        {
+          "division_name": "AFC North",
+          "picked_team": "Bengals",
+          "actual_team": "Ravens"
+        },
+        {
+          "division_name": "AFC East",
+          "picked_team": "Bills",
+          "actual_team": "Jets"
+        },
+        {
+          "division_name": "AFC West",
+          "picked_team": "Broncos",
+          "actual_team": "Chiefs"
+        },
+        {
+          "division_name": "NFC North",
+          "picked_team": "Lions",
+          "actual_team": "Vikings"
+        },
+        {
+          "division_name": "NFC South",
+          "picked_team": "Buccaneers",
+          "actual_team": "Falcons"
+        },
+        {
+          "division_name": "NFC West",
+          "picked_team": "Rams",
+          "actual_team": "49ers"
+        }
+      ]
+    },
+    "bettor-7": {
+      "name": "Farmer",
+      "correct_count": 1,
+      "total": 8,
+      "correct": [
+        {
+          "division_name": "AFC South",
+          "picked_team": "Jaguars",
+          "actual_team": "Jaguars"
+        }
+      ],
+      "wrong": [
+        {
+          "division_name": "AFC North",
+          "picked_team": "Bengals",
+          "actual_team": "Ravens"
+        },
+        {
+          "division_name": "AFC East",
+          "picked_team": "Bills",
+          "actual_team": "Jets"
+        },
+        {
+          "division_name": "AFC West",
+          "picked_team": "Broncos",
+          "actual_team": "Chiefs"
+        },
+        {
+          "division_name": "NFC North",
+          "picked_team": "Lions",
+          "actual_team": "Vikings"
+        },
+        {
+          "division_name": "NFC South",
+          "picked_team": "Buccaneers",
+          "actual_team": "Falcons"
+        },
+        {
+          "division_name": "NFC East",
+          "picked_team": "Cowboys",
+          "actual_team": "Giants"
+        },
+        {
+          "division_name": "NFC West",
+          "picked_team": "Rams",
+          "actual_team": "49ers"
+        }
+      ]
+    }
+  },
+  "lock_status": [
+    {
+      "division_name": "AFC North",
+      "slot": 3,
+      "predicted_team": "Steelers",
+      "holding": true,
+      "actual_team_name": "Steelers"
+    },
+    {
+      "division_name": "AFC North",
+      "slot": 4,
+      "predicted_team": "Browns",
+      "holding": true,
+      "actual_team_name": "Browns"
+    },
+    {
+      "division_name": "AFC East",
+      "slot": 1,
+      "predicted_team": "Bills",
+      "holding": false,
+      "actual_team_name": "Jets"
+    },
+    {
+      "division_name": "AFC East",
+      "slot": 2,
+      "predicted_team": "Patriots",
+      "holding": false,
+      "actual_team_name": "Bills"
+    },
+    {
+      "division_name": "AFC West",
+      "slot": 4,
+      "predicted_team": "Raiders",
+      "holding": false,
+      "actual_team_name": "Broncos"
+    },
+    {
+      "division_name": "NFC North",
+      "slot": 1,
+      "predicted_team": "Lions",
+      "holding": false,
+      "actual_team_name": "Vikings"
+    },
+    {
+      "division_name": "NFC West",
+      "slot": 1,
+      "predicted_team": "Rams",
+      "holding": false,
+      "actual_team_name": "49ers"
+    },
+    {
+      "division_name": "NFC West",
+      "slot": 4,
+      "predicted_team": "Cardinals",
+      "holding": false,
+      "actual_team_name": "Rams"
+    }
+  ],
+  "locks_holding": 2,
+  "locks_broken": 6
+}

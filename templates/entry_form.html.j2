@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Enter Pool Picks</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&display=swap">
+<style>
+  :root{
+    --bg:#0b0f1a; --surface:#131a2b; --card:#0f1523; --ink:#edeff5; --muted:#8993ac;
+    --line:#232c44; --accent:#ff5a48; --gold:#ffc94a; --danger:#ff3b3b; --ok:#39d27a;
+  }
+  *{box-sizing:border-box;}
+  body{background:var(--bg); color:var(--ink); font-family:'Barlow',sans-serif; margin:0; padding:20px 16px 80px;}
+  .wrap{max-width:920px; margin:0 auto;}
+  h1{font-family:'Anton',sans-serif; font-weight:400; text-transform:uppercase; letter-spacing:.01em; font-size:1.9rem; margin:0 0 4px;}
+  .sub{color:var(--muted); font-size:.9rem; margin:0 0 20px; line-height:1.5;}
+
+  .names{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:10px; margin-bottom:24px;}
+  .names label{display:block; font-size:.7rem; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); margin-bottom:4px;}
+  .names input{width:100%; background:var(--card); border:1px solid var(--line); color:var(--ink); border-radius:8px; padding:9px 10px; font-size:.95rem; font-family:inherit;}
+  .names input:focus{outline:none; border-color:var(--accent);}
+
+  .tabs{display:flex; gap:6px; flex-wrap:wrap; margin:18px 0; border-bottom:1px solid var(--line); padding-bottom:0;}
+  .tab{cursor:pointer; border:none; background:none; font-weight:600; font-size:.85rem; color:var(--muted); padding:9px 12px; border-bottom:3px solid transparent;}
+  .tab.active{color:var(--ink); border-bottom-color:var(--accent);}
+  .betpanel{display:none;}
+  .betpanel.active{display:block;}
+
+  .divrow{background:var(--card); border:1px solid var(--line); border-radius:10px; padding:12px 14px; margin-bottom:10px;}
+  .divrow .divname{font-weight:700; font-size:.85rem; margin-bottom:8px; color:var(--gold);}
+  .slots{display:grid; grid-template-columns:repeat(4,1fr); gap:8px;}
+  .slot label{display:block; font-size:.62rem; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; margin-bottom:3px;}
+  .slot select{width:100%; background:var(--surface); border:1px solid var(--line); color:var(--ink); border-radius:6px; padding:7px 6px; font-size:.82rem; font-family:inherit;}
+  .slot select.dup{border-color:var(--danger); box-shadow:0 0 0 1px var(--danger);}
+
+  .actions{position:sticky; bottom:0; background:var(--bg); padding:16px 0 4px; margin-top:20px; border-top:1px solid var(--line);}
+  .savebtn{background:var(--accent); color:#fff; border:none; border-radius:8px; padding:12px 22px; font-size:.95rem; font-weight:700; cursor:pointer; font-family:inherit;}
+  .savebtn:hover{opacity:.92;}
+  .status{margin-top:10px; font-size:.85rem; white-space:pre-line;}
+  .status.err{color:var(--danger);}
+  .status.ok{color:var(--ok);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Enter pool picks</h1>
+  <p class="sub">Locked, one-time entry — each bettor's 1&ndash;4 order for all 8 divisions, exactly as picked before the season. Saving overwrites <code>data/bettors.json</code> and <code>data/picks.json</code>.</p>
+
+  <div class="names">
+    {% for i in range(num_bettors) %}
+    <div>
+      <label for="name-{{ i }}">Bettor {{ i + 1 }} name</label>
+      <input type="text" id="name-{{ i }}" value="{{ bettor_names[i] }}">
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="tabs" role="tablist">
+    {% for i in range(num_bettors) %}
+    <button type="button" class="tab {{ 'active' if i == 0 else '' }}" data-idx="{{ i }}" onclick="showBettor({{ i }})">Bettor {{ i + 1 }}</button>
+    {% endfor %}
+  </div>
+
+  {% for i in range(num_bettors) %}
+  <div class="betpanel {{ 'active' if i == 0 else '' }}" id="panel-{{ i }}">
+    {% for div in divisions %}
+    <div class="divrow">
+      <div class="divname">{{ div.name }}</div>
+      <div class="slots">
+        {% for slot in range(4) %}
+        <div class="slot">
+          <label>{{ ['1st','2nd','3rd','4th'][slot] }}</label>
+          <select data-bettor="{{ i }}" data-division="{{ div.id }}" data-slot="{{ slot }}" onchange="checkDivision({{ i }}, '{{ div.id }}')">
+            {% for team in div.teams %}
+            <option value="{{ team.id }}" {{ 'selected' if pick_grid[i][div.id][slot] == team.id else '' }}>{{ team.name }} ({{ team.id }})</option>
+            {% endfor %}
+          </select>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endfor %}
+
+  <div class="actions">
+    <button type="button" class="savebtn" onclick="saveAll()">Save picks</button>
+    <div id="status" class="status"></div>
+  </div>
+</div>
+
+<script>
+  const DIVISION_IDS = {{ division_ids | tojson }};
+  const NUM_BETTORS = {{ num_bettors }};
+
+  function showBettor(i){
+    document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', Number(t.dataset.idx) === i));
+    document.querySelectorAll('.betpanel').forEach(p => p.classList.remove('active'));
+    document.getElementById('panel-' + i).classList.add('active');
+  }
+
+  function checkDivision(bettorIdx, divisionId){
+    const sels = Array.from(document.querySelectorAll(
+      `select[data-bettor="${bettorIdx}"][data-division="${divisionId}"]`
+    ));
+    const values = sels.map(s => s.value);
+    sels.forEach(s => {
+      const dup = values.filter(v => v === s.value).length > 1;
+      s.classList.toggle('dup', dup);
+    });
+    return sels.some(s => s.classList.contains('dup'));
+  }
+
+  function saveAll(){
+    const statusEl = document.getElementById('status');
+    statusEl.className = 'status';
+    statusEl.textContent = '';
+
+    const names = [];
+    for (let i = 0; i < NUM_BETTORS; i++){
+      names.push(document.getElementById('name-' + i).value.trim());
+    }
+    if (names.some(n => !n)){
+      statusEl.className = 'status err';
+      statusEl.textContent = 'Every bettor needs a name.';
+      return;
+    }
+
+    let hasDup = false;
+    const picks = {};
+    for (let i = 0; i < NUM_BETTORS; i++){
+      picks[i] = {};
+      for (const divId of DIVISION_IDS){
+        if (checkDivision(i, divId)) hasDup = true;
+        const sels = Array.from(document.querySelectorAll(
+          `select[data-bettor="${i}"][data-division="${divId}"]`
+        )).sort((a,b) => Number(a.dataset.slot) - Number(b.dataset.slot));
+        picks[i][divId] = sels.map(s => s.value);
+      }
+    }
+
+    if (hasDup){
+      statusEl.className = 'status err';
+      statusEl.textContent = 'Some divisions have the same team picked twice (highlighted in red). Fix those before saving.';
+      return;
+    }
+
+    fetch('/save', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({names, picks})
+    })
+      .then(r => r.json().then(data => ({status: r.status, data})))
+      .then(({status, data}) => {
+        if (status === 200 && data.ok){
+          statusEl.className = 'status ok';
+          statusEl.textContent = 'Saved. data/bettors.json and data/picks.json are updated -- close this tab whenever.';
+        } else {
+          statusEl.className = 'status err';
+          statusEl.textContent = 'Save failed:\n' + (data.errors || []).join('\n');
+        }
+      })
+      .catch(err => {
+        statusEl.className = 'status err';
+        statusEl.textContent = 'Save failed: ' + err;
+      });
+  }
+</script>
+</body>
+</html>
