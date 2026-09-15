@@ -1,11 +1,16 @@
-"""Render one week's analysis (data/weekly_facts/<season>-wkNN.json stats +
+"""Render weekly analysis pages (data/weekly_facts/<season>-wkNN.json stats +
 data/weekly_writeups/<season>-wkNN.json prose) into site/reports/week-NN.html.
 
 Usage:
+    python scripts/generate_week_report.py --all      # every week with a writeup (what deploys use)
     python scripts/generate_week_report.py            # latest week with a writeup
     python scripts/generate_week_report.py --week 3
 
-Requires scripts/analyze_week.py to have been run for that week, and a
+Deploys rebuild the whole site/ folder from scratch each time (it's not
+incremental), so --all is what the pipeline/Action should use -- otherwise
+older weeks' report pages silently disappear from a fresh deploy.
+
+Requires scripts/analyze_week.py to have been run for each week, and a
 matching data/weekly_writeups/<season>-wkNN.json written (by hand -- that's
 the actual commentary, not auto-generated).
 """
@@ -39,18 +44,11 @@ def find_facts_file(season: int, week: int | None) -> Path:
     return candidates[-1]
 
 
-def main():
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--season", type=int, default=None)
-    parser.add_argument("--week", type=int, default=None)
-    args = parser.parse_args()
-
-    divisions_data = load_json(DATA_DIR / "divisions.json")
-    season = args.season or divisions_data["season"]
-
-    facts_path = find_facts_file(season, args.week)
+def render_week(season: int, week: int, env: Environment) -> Path:
+    facts_path = WEEKLY_FACTS_DIR / f"{season}-wk{week:02d}.json"
+    if not facts_path.exists():
+        raise SystemExit(f"No such weekly facts file: {facts_path}. Run analyze_week.py first.")
     facts = load_json(facts_path)
-    week = facts["week"]
 
     writeup_path = WEEKLY_WRITEUPS_DIR / f"{season}-wk{week:02d}.json"
     if not writeup_path.exists():
@@ -65,7 +63,6 @@ def main():
         for f in writeup["fun_facts"]
     ]
 
-    env = Environment(loader=FileSystemLoader(str(TEMPLATES_DIR)), autoescape=True)
     template = env.get_template("week_report.html.j2")
     html = template.render(
         title=writeup["title"],
@@ -83,11 +80,43 @@ def main():
 
     reports_dir = SITE_DIR / "reports"
     reports_dir.mkdir(parents=True, exist_ok=True)
-    sync_assets(SITE_DIR)
     out_path = reports_dir / f"week-{week:02d}.html"
     with open(out_path, "w", encoding="utf-8") as f:
         f.write(html)
+    return out_path
 
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--season", type=int, default=None)
+    parser.add_argument("--week", type=int, default=None)
+    parser.add_argument("--all", action="store_true", help="Render every week that has a write-up")
+    args = parser.parse_args()
+
+    divisions_data = load_json(DATA_DIR / "divisions.json")
+    season = args.season or divisions_data["season"]
+
+    SITE_DIR.mkdir(parents=True, exist_ok=True)
+    sync_assets(SITE_DIR)
+    env = Environment(loader=FileSystemLoader(str(TEMPLATES_DIR)), autoescape=True)
+
+    if args.all:
+        writeup_files = sorted(WEEKLY_WRITEUPS_DIR.glob(f"{season}-wk*.json"))
+        if not writeup_files:
+            print("No weekly write-ups found -- nothing to render.")
+            return
+        for path in writeup_files:
+            week = int(path.stem.split("-wk")[1])
+            out_path = render_week(season, week, env)
+            print(f"OK -- wrote {out_path}")
+        return
+
+    if args.week is not None:
+        week = args.week
+    else:
+        week = load_json(find_facts_file(season, None))["week"]
+
+    out_path = render_week(season, week, env)
     print(f"OK -- wrote {out_path}")
 
 
