@@ -1,0 +1,1491 @@
+{
+  "season": 2026,
+  "week": 2,
+  "computed_at": "2026-09-22T13:05:35.273332+00:00",
+  "standings_source": {
+    "path": "data/standings/2026-wk02.json",
+    "fetched_at": "2026-09-22T13:05:35.227311+00:00"
+  },
+  "bettors": {
+    "bettor-1": {
+      "name": "Mike T",
+      "per_division": {
+        "afc-north": {
+          "predicted": [
+            "BAL",
+            "CIN",
+            "PIT",
+            "CLE"
+          ],
+          "actual": [
+            "CIN",
+            "BAL",
+            "PIT",
+            "CLE"
+          ],
+          "exact_flags": [
+            false,
+            false,
+            true,
+            true
+          ],
+          "exact_count": 2,
+          "perfect": false,
+          "top2_bonus": false,
+          "bottom2_bonus": true,
+          "division_total": 8
+        },
+        "afc-south": {
+          "predicted": [
+            "HOU",
+            "JAX",
+            "IND",
+            "TEN"
+          ],
+          "actual": [
+            "JAX",
+            "TEN",
+            "HOU",
+            "IND"
+          ],
+          "exact_flags": [
+            false,
+            false,
+            false,
+            false
+          ],
+          "exact_count": 0,
+          "perfect": false,
+          "top2_bonus": false,
+          "bottom2_bonus": false,
+          "division_total": 0
+        },
+        "afc-east": {
+          "predicted": [
+            "BUF",
+            "NE",
+            "NYJ",
+            "MIA"
+          ],
+          "actual": [
+            "BUF",
+            "NE",
+            "NYJ",
+            "MIA"
+          ],
+          "exact_flags": [
+            true,
+            true,
+            true,
+            true
+          ],
+          "exact_count": 4,
+          "perfect": true,
+          "top2_bonus": true,
+          "bottom2_bonus": true,
+          "division_total": 25
+        },
+        "afc-west": {
+          "predicted": [
+            "KC",
+            "DEN",
+            "LAC",
+            "LV"
+          ],
+          "actual": [
+            "KC",
+            "LV",
+            "DEN",
+            "LAC"
+          ],
+          "exact_flags": [
+            true,
+            false,
+            false,
+            false
+          ],
+          "exact_count": 1,
+          "perfect": false,
+          "top2_bonus": false,
+          "bottom2_bonus": false,
+          "division_total": 3
+        },
+        "nfc-north": {
+          "predicted": [
+            "DET",
+            "GB",
+            "CHI",
+            "MIN"
+          ],
+          "actual": [
+            "MIN",
+            "DET",
+            "CHI",
+            "GB"
+          ],
+          "exact_flags": [
+            false,
+            false,
+            true,
+            false
+          ],
+          "exact_count": 1,
+          "perfect": false,
+          "top2_bonus": false,
+          "bottom2_bonus": false,
+          "division_total": 3
+        },
+        "nfc-south": {
+          "predicted": [
+            "TB",
+            "NO",
+            "CAR",
+            "ATL"
+          ],
+          "actual": [
+            "CAR",
+            "NO",
+            "TB",
+            "ATL"
+          ],
+          "exact_flags": [
+            false,
+            true,
+            false,
+            true
+          ],
+          "exact_count": 2,
+          "perfect": false,
+          "top2_bonus": false,
+          "bottom2_bonus": false,
+          "division_total": 6
+        },
+        "nfc-east": {
+          "predicted": [
+            "PHI",
+            "DAL",
+            "WAS",
+            "NYG"
+          ],
+          "actual": [
+            "PHI",
+            "NYG",
+            "DAL",
+            "WAS"
+          ],
+          "exact_flags": [
+            true,
+            false,
+            false,
+            false
+          ],
+          "exact_count": 1,
+          "perfect": false,
+          "top2_bonus": false,
+          "bottom2_bonus": false,
+          "division_total": 3
+        },
+        "nfc-west": {
+          "predicted": [
+            "LAR",
+            "SEA",
+            "SF",
+            "ARI"
+          ],
+          "actual": [
+            "SEA",
+            "SF",
+            "LAR",
+            "ARI"
+          ],
+          "exact_flags": [
+            false,
+            false,
+            false,
+            true
+          ],
+          "exact_count": 1,
+          "perfect": false,
+          "top2_bonus": false,
+          "bottom2_bonus": false,
+          "division_total": 3
+        }
+      },
+      "total": 51,
+      "perfect_divisions_count": 1,
+      "top2_bonus_count": 1,
+      "bottom2_bonus_count": 2,
+      "total_exact_hits": 12
+    },
+    "bettor-2": {
+      "name": "Dilger",
+      "per_division": {
+        "afc-north": {
+          "predicted": [
+            "CIN",
+            "BAL",
+            "PIT",
+            "CLE"
+          ],
+          "actual": [
+            "CIN",
+            "BAL",
+            "PIT",
+            "CLE"
+          ],
+          "exact_flags": [
+            true,
+            true,
+            true,
+            true
+          ],
+          "exact_count": 4,
+          "perfect": true,
+          "top2_bonus": true,
+          "bottom2_bonus": true,
+          "division_total": 25
+        },
+        "afc-south": {
+          "predicted": [
+            "HOU",
+            "JAX",
+            "IND",
+            "TEN"
+          ],
+          "actual": [
+            "JAX",
+            "TEN",
+            "HOU",
+            "IND"
+          ],
+          "exact_flags": [
+            false,
+            false,
+            false,
+            false
+          ],
+          "exact_count": 0,
+          "perfect": false,
+          "top2_bonus": false,
+          "bottom2_bonus": false,
+          "division_total": 0
+        },
+        "afc-east": {
+          "predicted": [
+            "BUF",
+            "NE",
+            "NYJ",
+            "MIA"
+          ],
+          "actual": [
+            "BUF",
+            "NE",
+            "NYJ",
+            "MIA"
+          ],
+          "exact_flags": [
+            true,
+            true,
+            true,
+            true
+          ],
+          "exact_count": 4,
+          "perfect": true,
+          "top2_bonus": true,
+          "bottom2_bonus": true,
+          "division_total": 25
+        },
+        "afc-west": {
+          "predicted": [
+            "DEN",
+            "LAC",
+            "KC",
+            "LV"
+          ],
+          "actual": [
+            "KC",
+            "LV",
+            "DEN",
+            "LAC"
+          ],
+          "exact_flags": [
+            false,
+            false,
+            false,
+            false
+          ],
+          "exact_count": 0,
+          "perfect": false,
+          "top2_bonus": false,
+          "bottom2_bonus": false,
+          "division_total": 0
+        },
+        "nfc-north": {
+          "predicted": [
+            "DET",
+            "CHI",
+            "GB",
+            "MIN"
+          ],
+          "actual": [
+            "MIN",
+            "DET",
+            "CHI",
+            "GB"
+          ],
+          "exact_flags": [
+            false,
+            false,
+            false,
+            false
+          ],
+          "exact_count": 0,
+          "perfect": false,
+          "top2_bonus": false,
+          "bottom2_bonus": false,
+          "division_total": 0
+        },
+        "nfc-south": {
+          "predicted": [
+            "TB",
+            "NO",
+            "CAR",
+            "ATL"
+          ],
+          "actual": [
+            "CAR",
+            "NO",
+            "TB",
+            "ATL"
+          ],
+          "exact_flags": [
+            false,
+            true,
+            false,
+            true
+          ],
+          "exact_count": 2,
+          "perfect": false,
+          "top2_bonus": false,
+          "bottom2_bonus": false,
+          "division_total": 6
+        },
+        "nfc-east": {
+          "predicted": [
+            "PHI",
+            "NYG",
+            "WAS",
+            "DAL"
+          ],
+          "actual": [
+            "PHI",
+            "NYG",
+            "DAL",
+            "WAS"
+          ],
+          "exact_flags": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "exact_count": 2,
+          "perfect": false,
+          "top2_bonus": true,
+          "bottom2_bonus": false,
+          "division_total": 9
+        },
+        "nfc-west": {
+          "predicted": [
+            "LAR",
+            "SEA",
+            "SF",
+            "ARI"
+          ],
+          "actual": [
+            "SEA",
+            "SF",
+            "LAR",
+            "ARI"
+          ],
+          "exact_flags": [
+            false,
+            false,
+            false,
+            true
+          ],
+          "exact_count": 1,
+          "perfect": false,
+          "top2_bonus": false,
+          "bottom2_bonus": false,
+          "division_total": 3
+        }
+      },
+      "total": 68,
+      "perfect_divisions_count": 2,
+      "top2_bonus_count": 3,
+      "bottom2_bonus_count": 2,
+      "total_exact_hits": 13
+    },
+    "bettor-3": {
+      "name": "Dustin",
+      "per_division": {
+        "afc-north": {
+          "predicted": [
+            "BAL",
+            "CIN",
+            "PIT",
+            "CLE"
+          ],
+          "actual": [
+            "CIN",
+            "BAL",
+            "PIT",
+            "CLE"
+          ],
+          "exact_flags": [
+            false,
+            false,
+            true,
+            true
+          ],
+          "exact_count": 2,
+          "perfect": false,
+          "top2_bonus": false,
+          "bottom2_bonus": true,
+          "division_total": 8
+        },
+        "afc-south": {
+          "predicted": [
+            "HOU",
+            "JAX",
+            "IND",
+            "TEN"
+          ],
+          "actual": [
+            "JAX",
+            "TEN",
+            "HOU",
+            "IND"
+          ],
+          "exact_flags": [
+            false,
+            false,
+            false,
+            false
+          ],
+          "exact_count": 0,
+          "perfect": false,
+          "top2_bonus": false,
+          "bottom2_bonus": false,
+          "division_total": 0
+        },
+        "afc-east": {
+          "predicted": [
+            "BUF",
+            "NE",
+            "NYJ",
+            "MIA"
+          ],
+          "actual": [
+            "BUF",
+            "NE",
+            "NYJ",
+            "MIA"
+          ],
+          "exact_flags": [
+            true,
+            true,
+            true,
+            true
+          ],
+          "exact_count": 4,
+          "perfect": true,
+          "top2_bonus": true,
+          "bottom2_bonus": true,
+          "division_total": 25
+        },
+        "afc-west": {
+          "predicted": [
+            "DEN",
+            "KC",
+            "LAC",
+            "LV"
+          ],
+          "actual": [
+            "KC",
+            "LV",
+            "DEN",
+            "LAC"
+          ],
+          "exact_flags": [
+            false,
+            false,
+            false,
+            false
+          ],
+          "exact_count": 0,
+          "perfect": false,
+          "top2_bonus": false,
+          "bottom2_bonus": false,
+          "division_total": 0
+        },
+        "nfc-north": {
+          "predicted": [
+            "DET",
+            "GB",
+            "CHI",
+            "MIN"
+          ],
+          "actual": [
+            "MIN",
+            "DET",
+            "CHI",
+            "GB"
+          ],
+          "exact_flags": [
+            false,
+            false,
+            true,
+            false
+          ],
+          "exact_count": 1,
+          "perfect": false,
+          "top2_bonus": false,
+          "bottom2_bonus": false,
+          "division_total": 3
+        },
+        "nfc-south": {
+          "predicted": [
+            "NO",
+            "TB",
+            "ATL",
+            "CAR"
+          ],
+          "actual": [
+            "CAR",
+            "NO",
+            "TB",
+            "ATL"
+          ],
+          "exact_flags": [
+            false,
+            false,
+            false,
+            false
+          ],
+          "exact_count": 0,
+          "perfect": false,
+          "top2_bonus": false,
+          "bottom2_bonus": false,
+          "division_total": 0
+        },
+        "nfc-east": {
+          "predicted": [
+            "DAL",
+            "PHI",
+            "NYG",
+            "WAS"
+          ],
+          "actual": [
+            "PHI",
+            "NYG",
+            "DAL",
+            "WAS"
+          ],
+          "exact_flags": [
+            false,
+            false,
+            false,
+            true
+          ],
+          "exact_count": 1,
+          "perfect": false,
+          "top2_bonus": false,
+          "bottom2_bonus": false,
+          "division_total": 3
+        },
+        "nfc-west": {
+          "predicted": [
+            "LAR",
+            "SEA",
+            "SF",
+            "ARI"
+          ],
+          "actual": [
+            "SEA",
+            "SF",
+            "LAR",
+            "ARI"
+          ],
+          "exact_flags": [
+            false,
+            false,
+            false,
+            true
+          ],
+          "exact_count": 1,
+          "perfect": false,
+          "top2_bonus": false,
+          "bottom2_bonus": false,
+          "division_total": 3
+        }
+      },
+      "total": 42,
+      "perfect_divisions_count": 1,
+      "top2_bonus_count": 1,
+      "bottom2_bonus_count": 2,
+      "total_exact_hits": 9
+    },
+    "bettor-4": {
+      "name": "Tom",
+      "per_division": {
+        "afc-north": {
+          "predicted": [
+            "BAL",
+            "CIN",
+            "PIT",
+            "CLE"
+          ],
+          "actual": [
+            "CIN",
+            "BAL",
+            "PIT",
+            "CLE"
+          ],
+          "exact_flags": [
+            false,
+            false,
+            true,
+            true
+          ],
+          "exact_count": 2,
+          "perfect": false,
+          "top2_bonus": false,
+          "bottom2_bonus": true,
+          "division_total": 8
+        },
+        "afc-south": {
+          "predicted": [
+            "HOU",
+            "JAX",
+            "IND",
+            "TEN"
+          ],
+          "actual": [
+            "JAX",
+            "TEN",
+            "HOU",
+            "IND"
+          ],
+          "exact_flags": [
+            false,
+            false,
+            false,
+            false
+          ],
+          "exact_count": 0,
+          "perfect": false,
+          "top2_bonus": false,
+          "bottom2_bonus": false,
+          "division_total": 0
+        },
+        "afc-east": {
+          "predicted": [
+            "BUF",
+            "NE",
+            "NYJ",
+            "MIA"
+          ],
+          "actual": [
+            "BUF",
+            "NE",
+            "NYJ",
+            "MIA"
+          ],
+          "exact_flags": [
+            true,
+            true,
+            true,
+            true
+          ],
+          "exact_count": 4,
+          "perfect": true,
+          "top2_bonus": true,
+          "bottom2_bonus": true,
+          "division_total": 25
+        },
+        "afc-west": {
+          "predicted": [
+            "LAC",
+            "DEN",
+            "KC",
+            "LV"
+          ],
+          "actual": [
+            "KC",
+            "LV",
+            "DEN",
+            "LAC"
+          ],
+          "exact_flags": [
+            false,
+            false,
+            false,
+            false
+          ],
+          "exact_count": 0,
+          "perfect": false,
+          "top2_bonus": false,
+          "bottom2_bonus": false,
+          "division_total": 0
+        },
+        "nfc-north": {
+          "predicted": [
+            "DET",
+            "CHI",
+            "GB",
+            "MIN"
+          ],
+          "actual": [
+            "MIN",
+            "DET",
+            "CHI",
+            "GB"
+          ],
+          "exact_flags": [
+            false,
+            false,
+            false,
+            false
+          ],
+          "exact_count": 0,
+          "perfect": false,
+          "top2_bonus": false,
+          "bottom2_bonus": false,
+          "division_total": 0
+        },
+        "nfc-south": {
+          "predicted": [
+            "NO",
+            "TB",
+            "CAR",
+            "ATL"
+          ],
+          "actual": [
+            "CAR",
+            "NO",
+            "TB",
+            "ATL"
+          ],
+          "exact_flags": [
+            false,
+            false,
+            false,
+            true
+          ],
+          "exact_count": 1,
+          "perfect": false,
+          "top2_bonus": false,
+          "bottom2_bonus": false,
+          "division_total": 3
+        },
+        "nfc-east": {
+          "predicted": [
+            "PHI",
+            "NYG",
+            "DAL",
+            "WAS"
+          ],
+          "actual": [
+            "PHI",
+            "NYG",
+            "DAL",
+            "WAS"
+          ],
+          "exact_flags": [
+            true,
+            true,
+            true,
+            true
+          ],
+          "exact_count": 4,
+          "perfect": true,
+          "top2_bonus": true,
+          "bottom2_bonus": true,
+          "division_total": 25
+        },
+        "nfc-west": {
+          "predicted": [
+            "LAR",
+            "SEA",
+            "SF",
+            "ARI"
+          ],
+          "actual": [
+            "SEA",
+            "SF",
+            "LAR",
+            "ARI"
+          ],
+          "exact_flags": [
+            false,
+            false,
+            false,
+            true
+          ],
+          "exact_count": 1,
+          "perfect": false,
+          "top2_bonus": false,
+          "bottom2_bonus": false,
+          "division_total": 3
+        }
+      },
+      "total": 64,
+      "perfect_divisions_count": 2,
+      "top2_bonus_count": 2,
+      "bottom2_bonus_count": 3,
+      "total_exact_hits": 12
+    },
+    "bettor-5": {
+      "name": "Hume",
+      "per_division": {
+        "afc-north": {
+          "predicted": [
+            "CIN",
+            "BAL",
+            "PIT",
+            "CLE"
+          ],
+          "actual": [
+            "CIN",
+            "BAL",
+            "PIT",
+            "CLE"
+          ],
+          "exact_flags": [
+            true,
+            true,
+            true,
+            true
+          ],
+          "exact_count": 4,
+          "perfect": true,
+          "top2_bonus": true,
+          "bottom2_bonus": true,
+          "division_total": 25
+        },
+        "afc-south": {
+          "predicted": [
+            "HOU",
+            "JAX",
+            "IND",
+            "TEN"
+          ],
+          "actual": [
+            "JAX",
+            "TEN",
+            "HOU",
+            "IND"
+          ],
+          "exact_flags": [
+            false,
+            false,
+            false,
+            false
+          ],
+          "exact_count": 0,
+          "perfect": false,
+          "top2_bonus": false,
+          "bottom2_bonus": false,
+          "division_total": 0
+        },
+        "afc-east": {
+          "predicted": [
+            "BUF",
+            "NE",
+            "NYJ",
+            "MIA"
+          ],
+          "actual": [
+            "BUF",
+            "NE",
+            "NYJ",
+            "MIA"
+          ],
+          "exact_flags": [
+            true,
+            true,
+            true,
+            true
+          ],
+          "exact_count": 4,
+          "perfect": true,
+          "top2_bonus": true,
+          "bottom2_bonus": true,
+          "division_total": 25
+        },
+        "afc-west": {
+          "predicted": [
+            "KC",
+            "DEN",
+            "LAC",
+            "LV"
+          ],
+          "actual": [
+            "KC",
+            "LV",
+            "DEN",
+            "LAC"
+          ],
+          "exact_flags": [
+            true,
+            false,
+            false,
+            false
+          ],
+          "exact_count": 1,
+          "perfect": false,
+          "top2_bonus": false,
+          "bottom2_bonus": false,
+          "division_total": 3
+        },
+        "nfc-north": {
+          "predicted": [
+            "DET",
+            "MIN",
+            "GB",
+            "CHI"
+          ],
+          "actual": [
+            "MIN",
+            "DET",
+            "CHI",
+            "GB"
+          ],
+          "exact_flags": [
+            false,
+            false,
+            false,
+            false
+          ],
+          "exact_count": 0,
+          "perfect": false,
+          "top2_bonus": false,
+          "bottom2_bonus": false,
+          "division_total": 0
+        },
+        "nfc-south": {
+          "predicted": [
+            "TB",
+            "NO",
+            "ATL",
+            "CAR"
+          ],
+          "actual": [
+            "CAR",
+            "NO",
+            "TB",
+            "ATL"
+          ],
+          "exact_flags": [
+            false,
+            true,
+            false,
+            false
+          ],
+          "exact_count": 1,
+          "perfect": false,
+          "top2_bonus": false,
+          "bottom2_bonus": false,
+          "division_total": 3
+        },
+        "nfc-east": {
+          "predicted": [
+            "PHI",
+            "DAL",
+            "NYG",
+            "WAS"
+          ],
+          "actual": [
+            "PHI",
+            "NYG",
+            "DAL",
+            "WAS"
+          ],
+          "exact_flags": [
+            true,
+            false,
+            false,
+            true
+          ],
+          "exact_count": 2,
+          "perfect": false,
+          "top2_bonus": false,
+          "bottom2_bonus": false,
+          "division_total": 6
+        },
+        "nfc-west": {
+          "predicted": [
+            "LAR",
+            "SEA",
+            "SF",
+            "ARI"
+          ],
+          "actual": [
+            "SEA",
+            "SF",
+            "LAR",
+            "ARI"
+          ],
+          "exact_flags": [
+            false,
+            false,
+            false,
+            true
+          ],
+          "exact_count": 1,
+          "perfect": false,
+          "top2_bonus": false,
+          "bottom2_bonus": false,
+          "division_total": 3
+        }
+      },
+      "total": 65,
+      "perfect_divisions_count": 2,
+      "top2_bonus_count": 2,
+      "bottom2_bonus_count": 2,
+      "total_exact_hits": 13
+    },
+    "bettor-6": {
+      "name": "Cadegn",
+      "per_division": {
+        "afc-north": {
+          "predicted": [
+            "CIN",
+            "BAL",
+            "PIT",
+            "CLE"
+          ],
+          "actual": [
+            "CIN",
+            "BAL",
+            "PIT",
+            "CLE"
+          ],
+          "exact_flags": [
+            true,
+            true,
+            true,
+            true
+          ],
+          "exact_count": 4,
+          "perfect": true,
+          "top2_bonus": true,
+          "bottom2_bonus": true,
+          "division_total": 25
+        },
+        "afc-south": {
+          "predicted": [
+            "JAX",
+            "HOU",
+            "IND",
+            "TEN"
+          ],
+          "actual": [
+            "JAX",
+            "TEN",
+            "HOU",
+            "IND"
+          ],
+          "exact_flags": [
+            true,
+            false,
+            false,
+            false
+          ],
+          "exact_count": 1,
+          "perfect": false,
+          "top2_bonus": false,
+          "bottom2_bonus": false,
+          "division_total": 3
+        },
+        "afc-east": {
+          "predicted": [
+            "BUF",
+            "NE",
+            "NYJ",
+            "MIA"
+          ],
+          "actual": [
+            "BUF",
+            "NE",
+            "NYJ",
+            "MIA"
+          ],
+          "exact_flags": [
+            true,
+            true,
+            true,
+            true
+          ],
+          "exact_count": 4,
+          "perfect": true,
+          "top2_bonus": true,
+          "bottom2_bonus": true,
+          "division_total": 25
+        },
+        "afc-west": {
+          "predicted": [
+            "DEN",
+            "KC",
+            "LAC",
+            "LV"
+          ],
+          "actual": [
+            "KC",
+            "LV",
+            "DEN",
+            "LAC"
+          ],
+          "exact_flags": [
+            false,
+            false,
+            false,
+            false
+          ],
+          "exact_count": 0,
+          "perfect": false,
+          "top2_bonus": false,
+          "bottom2_bonus": false,
+          "division_total": 0
+        },
+        "nfc-north": {
+          "predicted": [
+            "DET",
+            "CHI",
+            "GB",
+            "MIN"
+          ],
+          "actual": [
+            "MIN",
+            "DET",
+            "CHI",
+            "GB"
+          ],
+          "exact_flags": [
+            false,
+            false,
+            false,
+            false
+          ],
+          "exact_count": 0,
+          "perfect": false,
+          "top2_bonus": false,
+          "bottom2_bonus": false,
+          "division_total": 0
+        },
+        "nfc-south": {
+          "predicted": [
+            "TB",
+            "CAR",
+            "ATL",
+            "NO"
+          ],
+          "actual": [
+            "CAR",
+            "NO",
+            "TB",
+            "ATL"
+          ],
+          "exact_flags": [
+            false,
+            false,
+            false,
+            false
+          ],
+          "exact_count": 0,
+          "perfect": false,
+          "top2_bonus": false,
+          "bottom2_bonus": false,
+          "division_total": 0
+        },
+        "nfc-east": {
+          "predicted": [
+            "NYG",
+            "PHI",
+            "DAL",
+            "WAS"
+          ],
+          "actual": [
+            "PHI",
+            "NYG",
+            "DAL",
+            "WAS"
+          ],
+          "exact_flags": [
+            false,
+            false,
+            true,
+            true
+          ],
+          "exact_count": 2,
+          "perfect": false,
+          "top2_bonus": false,
+          "bottom2_bonus": true,
+          "division_total": 8
+        },
+        "nfc-west": {
+          "predicted": [
+            "LAR",
+            "SF",
+            "SEA",
+            "ARI"
+          ],
+          "actual": [
+            "SEA",
+            "SF",
+            "LAR",
+            "ARI"
+          ],
+          "exact_flags": [
+            false,
+            true,
+            false,
+            true
+          ],
+          "exact_count": 2,
+          "perfect": false,
+          "top2_bonus": false,
+          "bottom2_bonus": false,
+          "division_total": 6
+        }
+      },
+      "total": 67,
+      "perfect_divisions_count": 2,
+      "top2_bonus_count": 2,
+      "bottom2_bonus_count": 3,
+      "total_exact_hits": 13
+    },
+    "bettor-7": {
+      "name": "Farmer",
+      "per_division": {
+        "afc-north": {
+          "predicted": [
+            "CIN",
+            "BAL",
+            "PIT",
+            "CLE"
+          ],
+          "actual": [
+            "CIN",
+            "BAL",
+            "PIT",
+            "CLE"
+          ],
+          "exact_flags": [
+            true,
+            true,
+            true,
+            true
+          ],
+          "exact_count": 4,
+          "perfect": true,
+          "top2_bonus": true,
+          "bottom2_bonus": true,
+          "division_total": 25
+        },
+        "afc-south": {
+          "predicted": [
+            "JAX",
+            "HOU",
+            "TEN",
+            "IND"
+          ],
+          "actual": [
+            "JAX",
+            "TEN",
+            "HOU",
+            "IND"
+          ],
+          "exact_flags": [
+            true,
+            false,
+            false,
+            true
+          ],
+          "exact_count": 2,
+          "perfect": false,
+          "top2_bonus": false,
+          "bottom2_bonus": false,
+          "division_total": 6
+        },
+        "afc-east": {
+          "predicted": [
+            "BUF",
+            "NE",
+            "MIA",
+            "NYJ"
+          ],
+          "actual": [
+            "BUF",
+            "NE",
+            "NYJ",
+            "MIA"
+          ],
+          "exact_flags": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "exact_count": 2,
+          "perfect": false,
+          "top2_bonus": true,
+          "bottom2_bonus": false,
+          "division_total": 9
+        },
+        "afc-west": {
+          "predicted": [
+            "DEN",
+            "LAC",
+            "KC",
+            "LV"
+          ],
+          "actual": [
+            "KC",
+            "LV",
+            "DEN",
+            "LAC"
+          ],
+          "exact_flags": [
+            false,
+            false,
+            false,
+            false
+          ],
+          "exact_count": 0,
+          "perfect": false,
+          "top2_bonus": false,
+          "bottom2_bonus": false,
+          "division_total": 0
+        },
+        "nfc-north": {
+          "predicted": [
+            "DET",
+            "CHI",
+            "GB",
+            "MIN"
+          ],
+          "actual": [
+            "MIN",
+            "DET",
+            "CHI",
+            "GB"
+          ],
+          "exact_flags": [
+            false,
+            false,
+            false,
+            false
+          ],
+          "exact_count": 0,
+          "perfect": false,
+          "top2_bonus": false,
+          "bottom2_bonus": false,
+          "division_total": 0
+        },
+        "nfc-south": {
+          "predicted": [
+            "TB",
+            "ATL",
+            "CAR",
+            "NO"
+          ],
+          "actual": [
+            "CAR",
+            "NO",
+            "TB",
+            "ATL"
+          ],
+          "exact_flags": [
+            false,
+            false,
+            false,
+            false
+          ],
+          "exact_count": 0,
+          "perfect": false,
+          "top2_bonus": false,
+          "bottom2_bonus": false,
+          "division_total": 0
+        },
+        "nfc-east": {
+          "predicted": [
+            "DAL",
+            "NYG",
+            "PHI",
+            "WAS"
+          ],
+          "actual": [
+            "PHI",
+            "NYG",
+            "DAL",
+            "WAS"
+          ],
+          "exact_flags": [
+            false,
+            true,
+            false,
+            true
+          ],
+          "exact_count": 2,
+          "perfect": false,
+          "top2_bonus": false,
+          "bottom2_bonus": false,
+          "division_total": 6
+        },
+        "nfc-west": {
+          "predicted": [
+            "LAR",
+            "SEA",
+            "SF",
+            "ARI"
+          ],
+          "actual": [
+            "SEA",
+            "SF",
+            "LAR",
+            "ARI"
+          ],
+          "exact_flags": [
+            false,
+            false,
+            false,
+            true
+          ],
+          "exact_count": 1,
+          "perfect": false,
+          "top2_bonus": false,
+          "bottom2_bonus": false,
+          "division_total": 3
+        }
+      },
+      "total": 49,
+      "perfect_divisions_count": 1,
+      "top2_bonus_count": 2,
+      "bottom2_bonus_count": 1,
+      "total_exact_hits": 11
+    }
+  },
+  "leaderboard": [
+    "bettor-2",
+    "bettor-6",
+    "bettor-5",
+    "bettor-4",
+    "bettor-1",
+    "bettor-7",
+    "bettor-3"
+  ],
+  "unresolved_ties": []
+}
