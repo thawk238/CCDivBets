@@ -34,6 +34,48 @@ def team_lookup(divisions_data: dict) -> dict:
     return lookup
 
 
+def rank_leaderboard(scores: dict) -> list:
+    """scores (a compute_scores.py output dict) -> ranked list of
+    {bettor_id, name, total, rank, tied, perfect_divisions_count,
+    top2_bonus_count, bottom2_bonus_count, total_exact_hits}.
+
+    scores["leaderboard"] is already ordered correctly by the official
+    tiebreak chain; this just re-derives equal ranks for ties using the
+    same fields, so every page that shows a rank agrees with every other.
+    """
+    lb_order = scores["leaderboard"]
+    ranked = []
+    for i, bid in enumerate(lb_order):
+        b = scores["bettors"][bid]
+        rank = i + 1
+        tied = False
+        if i > 0:
+            prev = scores["bettors"][lb_order[i - 1]]
+            tied = (
+                b["total"] == prev["total"]
+                and b["perfect_divisions_count"] == prev["perfect_divisions_count"]
+                and b["top2_bonus_count"] == prev["top2_bonus_count"]
+                and b["bottom2_bonus_count"] == prev["bottom2_bonus_count"]
+                and b["total_exact_hits"] == prev["total_exact_hits"]
+            )
+            if tied:
+                rank = ranked[-1]["rank"]
+        ranked.append(
+            {
+                "bettor_id": bid,
+                "name": b["name"],
+                "total": b["total"],
+                "rank": rank,
+                "tied": tied,
+                "perfect_divisions_count": b["perfect_divisions_count"],
+                "top2_bonus_count": b["top2_bonus_count"],
+                "bottom2_bonus_count": b["bottom2_bonus_count"],
+                "total_exact_hits": b["total_exact_hits"],
+            }
+        )
+    return ranked
+
+
 def sync_assets(site_dir: Path) -> None:
     """Copy assets/ (team logos, etc.) into the generated site/ folder so it
     stays a single self-contained, portable directory."""

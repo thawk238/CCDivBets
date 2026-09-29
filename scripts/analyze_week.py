@@ -19,7 +19,7 @@ import argparse
 import json
 from pathlib import Path
 
-from _common import load_json
+from _common import load_json, rank_leaderboard
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT / "data"
@@ -71,13 +71,11 @@ def main():
         if earlier:
             prev_scores = load_json(sorted(earlier, key=lambda p: load_json(p)["week"])[-1])
 
-    leaderboard = []
-    for i, bid in enumerate(scores["leaderboard"]):
-        b = scores["bettors"][bid]
-        delta = None
-        if prev_scores and bid in prev_scores["bettors"]:
-            delta = b["total"] - prev_scores["bettors"][bid]["total"]
-        leaderboard.append({"bettor_id": bid, "name": b["name"], "rank": i + 1, "total": b["total"], "delta": delta})
+    leaderboard = rank_leaderboard(scores)
+    for row in leaderboard:
+        row["delta"] = None
+        if prev_scores and row["bettor_id"] in prev_scores["bettors"]:
+            row["delta"] = row["total"] - prev_scores["bettors"][row["bettor_id"]]["total"]
 
     gaps = []
     for i in range(len(leaderboard) - 1):

@@ -14,7 +14,7 @@ from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader
 
-from _common import bettor_colors, load_json, sync_assets, team_lookup
+from _common import bettor_colors, load_json, rank_leaderboard, sync_assets, team_lookup
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT / "data"
@@ -64,35 +64,7 @@ def main():
     scores = load_json(scores_path)
 
     # ---- Leaderboard ----
-    leaderboard = []
-    lb_order = scores["leaderboard"]
-    for i, bid in enumerate(lb_order):
-        b = scores["bettors"][bid]
-        rank = i + 1
-        tied = False
-        if i > 0:
-            prev = scores["bettors"][lb_order[i - 1]]
-            tied = (
-                b["total"] == prev["total"]
-                and b["perfect_divisions_count"] == prev["perfect_divisions_count"]
-                and b["top2_bonus_count"] == prev["top2_bonus_count"]
-                and b["bottom2_bonus_count"] == prev["bottom2_bonus_count"]
-                and b["total_exact_hits"] == prev["total_exact_hits"]
-            )
-            if tied:
-                rank = leaderboard[-1]["rank"]
-        leaderboard.append(
-            {
-                "rank": rank,
-                "name": b["name"],
-                "total": b["total"],
-                "perfect_divisions_count": b["perfect_divisions_count"],
-                "top2_bonus_count": b["top2_bonus_count"],
-                "bottom2_bonus_count": b["bottom2_bonus_count"],
-                "total_exact_hits": b["total_exact_hits"],
-                "tied": tied,
-            }
-        )
+    leaderboard = rank_leaderboard(scores)
 
     # ---- Standings by division (actual order + records) ----
     standings_by_division = {}
@@ -104,7 +76,7 @@ def main():
 
     # ---- Division breakdown (per division, per bettor) ----
     division_breakdown = {div["id"]: [] for div in divisions_data["divisions"]}
-    for bid in lb_order:  # keep leaderboard order within each division too
+    for bid in scores["leaderboard"]:  # keep leaderboard order within each division too
         b = scores["bettors"][bid]
         for div_id, d in b["per_division"].items():
             division_breakdown[div_id].append(
