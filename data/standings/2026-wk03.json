@@ -1,0 +1,344 @@
+{
+  "season": 2026,
+  "week": 3,
+  "fetched_at": "2026-09-29T13:05:22.330874+00:00",
+  "source_url": "https://sports.yahoo.com/nfl/standings/",
+  "divisions": {
+    "nfc-south": [
+      {
+        "yahoo_city": "Carolina",
+        "team_id": "CAR",
+        "wins": 1,
+        "losses": 2,
+        "ties": 0,
+        "pct": ".333",
+        "pf": 89,
+        "pa": 83
+      },
+      {
+        "yahoo_city": "New Orleans",
+        "team_id": "NO",
+        "wins": 1,
+        "losses": 2,
+        "ties": 0,
+        "pct": ".333",
+        "pf": 81,
+        "pa": 83
+      },
+      {
+        "yahoo_city": "Atlanta",
+        "team_id": "ATL",
+        "wins": 1,
+        "losses": 2,
+        "ties": 0,
+        "pct": ".333",
+        "pf": 51,
+        "pa": 68
+      },
+      {
+        "yahoo_city": "Tampa Bay",
+        "team_id": "TB",
+        "wins": 0,
+        "losses": 3,
+        "ties": 0,
+        "pct": ".000",
+        "pf": 62,
+        "pa": 79
+      }
+    ],
+    "nfc-north": [
+      {
+        "yahoo_city": "Minnesota",
+        "team_id": "MIN",
+        "wins": 3,
+        "losses": 0,
+        "ties": 0,
+        "pct": "1.000",
+        "pf": 71,
+        "pa": 41
+      },
+      {
+        "yahoo_city": "Detroit",
+        "team_id": "DET",
+        "wins": 2,
+        "losses": 1,
+        "ties": 0,
+        "pct": ".667",
+        "pf": 93,
+        "pa": 95
+      },
+      {
+        "yahoo_city": "Chicago",
+        "team_id": "CHI",
+        "wins": 2,
+        "losses": 1,
+        "ties": 0,
+        "pct": ".667",
+        "pf": 89,
+        "pa": 53
+      },
+      {
+        "yahoo_city": "Green Bay",
+        "team_id": "GB",
+        "wins": 1,
+        "losses": 2,
+        "ties": 0,
+        "pct": ".333",
+        "pf": 56,
+        "pa": 91
+      }
+    ],
+    "nfc-east": [
+      {
+        "yahoo_city": "Philadelphia",
+        "team_id": "PHI",
+        "wins": 2,
+        "losses": 1,
+        "ties": 0,
+        "pct": ".667",
+        "pf": 55,
+        "pa": 69
+      },
+      {
+        "yahoo_city": "NY Giants",
+        "team_id": "NYG",
+        "wins": 2,
+        "losses": 1,
+        "ties": 0,
+        "pct": ".667",
+        "pf": 46,
+        "pa": 55
+      },
+      {
+        "yahoo_city": "Dallas",
+        "team_id": "DAL",
+        "wins": 1,
+        "losses": 2,
+        "ties": 0,
+        "pct": ".333",
+        "pf": 88,
+        "pa": 82
+      },
+      {
+        "yahoo_city": "Washington",
+        "team_id": "WAS",
+        "wins": 1,
+        "losses": 2,
+        "ties": 0,
+        "pct": ".333",
+        "pf": 75,
+        "pa": 92
+      }
+    ],
+    "nfc-west": [
+      {
+        "yahoo_city": "San Francisco",
+        "team_id": "SF",
+        "wins": 3,
+        "losses": 0,
+        "ties": 0,
+        "pct": "1.000",
+        "pf": 98,
+        "pa": 50
+      },
+      {
+        "yahoo_city": "Seattle",
+        "team_id": "SEA",
+        "wins": 2,
+        "losses": 1,
+        "ties": 0,
+        "pct": ".667",
+        "pf": 75,
+        "pa": 50
+      },
+      {
+        "yahoo_city": "LA Rams",
+        "team_id": "LAR",
+        "wins": 1,
+        "losses": 2,
+        "ties": 0,
+        "pct": ".333",
+        "pf": 61,
+        "pa": 63
+      },
+      {
+        "yahoo_city": "Arizona",
+        "team_id": "ARI",
+        "wins": 1,
+        "losses": 2,
+        "ties": 0,
+        "pct": ".333",
+        "pf": 63,
+        "pa": 81
+      }
+    ],
+    "afc-east": [
+      {
+        "yahoo_city": "Buffalo",
+        "team_id": "BUF",
+        "wins": 3,
+        "losses": 0,
+        "ties": 0,
+        "pct": "1.000",
+        "pf": 101,
+        "pa": 78
+      },
+      {
+        "yahoo_city": "NY Jets",
+        "team_id": "NYJ",
+        "wins": 1,
+        "losses": 2,
+        "ties": 0,
+        "pct": ".333",
+        "pf": 64,
+        "pa": 61
+      },
+      {
+        "yahoo_city": "New England",
+        "team_id": "NE",
+        "wins": 1,
+        "losses": 2,
+        "ties": 0,
+        "pct": ".333",
+        "pf": 36,
+        "pa": 51
+      },
+      {
+        "yahoo_city": "Miami",
+        "team_id": "MIA",
+        "wins": 0,
+        "losses": 3,
+        "ties": 0,
+        "pct": ".000",
+        "pf": 36,
+        "pa": 86
+      }
+    ],
+    "afc-north": [
+      {
+        "yahoo_city": "Pittsburgh",
+        "team_id": "PIT",
+        "wins": 2,
+        "losses": 1,
+        "ties": 0,
+        "pct": ".667",
+        "pf": 53,
+        "pa": 60
+      },
+      {
+        "yahoo_city": "Baltimore",
+        "team_id": "BAL",
+        "wins": 2,
+        "losses": 1,
+        "ties": 0,
+        "pct": ".667",
+        "pf": 92,
+        "pa": 78
+      },
+      {
+        "yahoo_city": "Cleveland",
+        "team_id": "CLE",
+        "wins": 2,
+        "losses": 1,
+        "ties": 0,
+        "pct": ".667",
+        "pf": 54,
+        "pa": 71
+      },
+      {
+        "yahoo_city": "Cincinnati",
+        "team_id": "CIN",
+        "wins": 2,
+        "losses": 1,
+        "ties": 0,
+        "pct": ".667",
+        "pf": 80,
+        "pa": 63
+      }
+    ],
+    "afc-west": [
+      {
+        "yahoo_city": "Kansas City",
+        "team_id": "KC",
+        "wins": 3,
+        "losses": 0,
+        "ties": 0,
+        "pct": "1.000",
+        "pf": 88,
+        "pa": 50
+      },
+      {
+        "yahoo_city": "Las Vegas",
+        "team_id": "LV",
+        "wins": 3,
+        "losses": 0,
+        "ties": 0,
+        "pct": "1.000",
+        "pf": 88,
+        "pa": 54
+      },
+      {
+        "yahoo_city": "Denver",
+        "team_id": "DEN",
+        "wins": 2,
+        "losses": 1,
+        "ties": 0,
+        "pct": ".667",
+        "pf": 60,
+        "pa": 70
+      },
+      {
+        "yahoo_city": "LA Chargers",
+        "team_id": "LAC",
+        "wins": 0,
+        "losses": 3,
+        "ties": 0,
+        "pct": ".000",
+        "pf": 44,
+        "pa": 76
+      }
+    ],
+    "afc-south": [
+      {
+        "yahoo_city": "Jacksonville",
+        "team_id": "JAX",
+        "wins": 2,
+        "losses": 1,
+        "ties": 0,
+        "pct": ".667",
+        "pf": 82,
+        "pa": 36
+      },
+      {
+        "yahoo_city": "Indianapolis",
+        "team_id": "IND",
+        "wins": 1,
+        "losses": 2,
+        "ties": 0,
+        "pct": ".333",
+        "pf": 72,
+        "pa": 91
+      },
+      {
+        "yahoo_city": "Tennessee",
+        "team_id": "TEN",
+        "wins": 0,
+        "losses": 3,
+        "ties": 0,
+        "pct": ".000",
+        "pf": 37,
+        "pa": 59
+      },
+      {
+        "yahoo_city": "Houston",
+        "team_id": "HOU",
+        "wins": 0,
+        "losses": 3,
+        "ties": 0,
+        "pct": ".000",
+        "pf": 54,
+        "pa": 75
+      }
+    ]
+  }
+}
