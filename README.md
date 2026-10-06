@@ -1,27 +1,49 @@
 # Sunday Best Divisional Pool
 
-A file-based NFL divisional standings prediction pool for 7 bettors. Everyone picked a
-1st-through-4th finish order for all 8 NFL divisions before the season started. Picks are
-locked and never change; only the real Yahoo Sports standings move week to week. This repo
-scores everyone against those standings, keeps a full history, and publishes a static site.
+An NFL division-standings prediction pool for 7 bettors. Before the season, everyone picked
+a 1st-through-4th finish order for all 8 divisions. Picks are locked; only the real Yahoo
+Sports standings move. This repo scores everyone against those standings each week, keeps
+the full history, and publishes a static site.
 
 **Live site:** https://thawk238.github.io/CCDivBets/
 
+---
+
+## Every week (the 2-minute checklist)
+
+Run this any time after Monday Night Football finishes (usually Tuesday).
+
+1. **Update the standings.** GitHub → **Actions** → **Weekly Update** → **Run workflow**
+   (branch `main`). Takes about a minute. This scrapes Yahoo, rescores everyone, commits
+   the new `data/` files, and redeploys the live site.
+2. **Write the week's analysis.** Ask Claude: *"write the Week N analysis"*. The commentary
+   is written from the stats the run just produced (`data/weekly_facts/<season>-wkNN.json`)
+   and saved to `data/weekly_writeups/<season>-wkNN.json`, then pushed.
+3. **Publish the analysis.** Click **Run workflow** once more so the live site picks up the
+   new write-up.
+4. **Spot-check** the live leaderboard and `reports.html`.
+
+The workflow is **manual only** — there is no schedule. If nobody clicks the button, the
+site doesn't update. (The old Tuesday cron was removed because GitHub fired it 4–5 hours
+late.)
+
+---
+
 ## Rules & scoring
 
-**The pick:** Before the season, each bettor picks a 1st-through-4th finish order for all
-8 NFL divisions. Locked in -- no changes once the season starts.
+**The pick:** each bettor picks a 1–4 finish order for all 8 divisions before the season.
+No changes once the season starts.
 
 **Scoring (per division):**
 
 | Rule | Points |
 |---|---|
-| Exact position (1-4) correct | +3 per team |
+| Exact position (1–4) correct | +3 per team |
 | Perfect division (all 4 exact) | +8 bonus |
 | Top-2 in exact order | +3 bonus |
 | Bottom-2 in exact order | +2 bonus |
 
-Division max: 4×3 + 8 + 3 + 2 = **25**. Season max (8 divisions): 8×25 = **200**.
+Division max: 4×3 + 8 + 3 + 2 = **25**. Season max (8 divisions): **200**.
 
 **Tiebreakers, in order:**
 
@@ -29,73 +51,47 @@ Division max: 4×3 + 8 + 3 + 2 = **25**. Season max (8 divisions): 8×25 = **200
 2. Most top-2-in-order bonuses
 3. Most bottom-2-in-order bonuses
 4. Most total exact hits (out of 32)
-5. Closest guess to a designated week's total points (`data/tiebreaker.json` -- not set up yet)
+5. Closest guess to a designated week's total points — `data/tiebreaker.json`
+   (**not set up yet**; needs a week + everyone's guesses before season's end)
 6. Coin flip
 
-Standings are based on Yahoo Sports' real NFL division standings, updated weekly.
-
-## Project layout
-
-```
-data/
-  divisions.json          # canonical: 8 divisions, 32 teams, colors, Yahoo's naming
-  bettors.json             # the 7 names, ids bettor-1..bettor-7
-  picks.json                # LOCKED once entered: everyone's 1-4 order per division
-  tiebreaker.json            # inert until a week + guesses are set
-  standings/<season>-wkNN.json   # one dated snapshot per week, scraped from Yahoo
-  scores/<season>-wkNN.json      # derived: computed points per bettor per week
-  preseason_facts.json      # deterministic stats about the picks (locks, variation, etc.)
-  preseason_writeup.json     # the actual preseason commentary (hand-written)
-  weekly_facts/<season>-wkNN.json    # deterministic stats about that week's results
-  weekly_writeups/<season>-wkNN.json # that week's commentary (hand-written)
-
-scripts/            # see "Weekly workflow" below
-templates/*.html.j2  # Jinja2 templates for every page, "Blitz" visual style
-assets/logos/         # real team logos (ESPN's public CDN, downloaded once)
-site/                 # generated output -- gitignored, rebuilt every run
-.github/workflows/weekly-update.yml   # weekly pipeline (manual trigger)
-```
+---
 
 ## Running it locally
+
+Requires Python 3.12 (the version the GitHub workflow uses).
 
 ```
 pip install -r requirements.txt
 python scripts/run_weekly.py
 ```
 
-This scrapes current Yahoo standings, computes scores, and rebuilds the entire `site/`
-folder (leaderboard, preseason report, every week's analysis that has a write-up, and the
-reports hub). Open `site/index.html` in a browser to check it.
+This scrapes current Yahoo standings, computes scores and weekly stats, and rebuilds the
+whole `site/` folder. Open `site/index.html` (or `site/reports/week-NN.html`) in a browser
+to check it.
 
-If Yahoo's page fails to parse correctly, the scraper refuses to publish -- it writes a
-`data/standings/<week>.pending-review.json` for you to inspect instead of overwriting good
-data with bad. Nothing downstream runs until that's resolved.
+Running locally does **not** update the live site — only the GitHub workflow deploys. If
+you run locally, commit and push `data/` and then run the workflow. Do `git pull` first so
+you don't conflict with the bot's commits to `data/standings/` and `data/scores/`.
 
-## Weekly workflow
-
-Each week, run `.github/workflows/weekly-update.yml` by hand (GitHub -> Actions ->
-Weekly Update -> Run workflow). It is not on a schedule. It:
-
-1. Scrapes Yahoo, computes scores, rebuilds the leaderboard
-2. Computes that week's fun-facts stats (`data/weekly_facts/`)
-3. Commits the updated `data/` files back to the repo
-4. Deploys the rebuilt `site/` to GitHub Pages
-
-**What it does NOT do:** write that week's analysis commentary. That's a deliberate manual
-step -- ask Claude (or write it yourself) using the fresh stats in `data/weekly_facts/`,
-save it to `data/weekly_writeups/<season>-wkNN.json` (same shape as an existing week), then:
+**After editing a write-up**, rebuild just the report pages:
 
 ```
 python scripts/generate_week_report.py --all
 python scripts/generate_reports_hub.py
-git add data/weekly_writeups site
-git commit -m "Week N analysis"
-git push
 ```
 
-(Only `data/` needs pushing for the *next* automated run to have it; `site/` is gitignored
-and only matters if you're checking it locally -- the Action rebuilds and deploys it fresh
-from `data/` either way.)
+### Safety checks
+
+- **Bad scrape:** if Yahoo's page doesn't validate (8 divisions, 4 known teams each), the
+  scraper refuses to publish and writes `data/standings/<week>.pending-review.json` instead.
+  Nothing downstream runs until that's resolved.
+- **Wrong week number:** the week is auto-computed from `SEASON_START` in
+  `scripts/scrape_standings.py` (2026-09-10). To force it, use
+  `python scripts/scrape_standings.py --week N` and `python scripts/compute_scores.py --week N`.
+  Sanity check: every team's W+L+T should equal the week number.
+
+---
 
 ## Entering or changing picks
 
@@ -104,25 +100,60 @@ python scripts/entry_form.py
 ```
 
 Opens a local form at `http://localhost:8765/` pre-filled with the current picks. Duplicate
-teams within a division are caught and highlighted before you can save. Saving overwrites
-`data/bettors.json` and `data/picks.json` directly -- commit and push those afterward the
-same as any other data change.
+teams within a division are flagged before saving. Saving overwrites `data/bettors.json` and
+`data/picks.json` — commit and push those afterward.
 
-## Repo/hosting notes
+---
 
-- The repo is public by choice (names and picks, no financial info beyond who owes $20).
-- GitHub Pages is configured to deploy from GitHub Actions (Settings → Pages → Source), and
-  the workflow needs "Read and write permissions" under Settings → Actions → General so it
-  can commit data back to the repo.
-- `run_weekly.py` always rebuilds the *entire* site, not just what changed -- a Pages deploy
-  replaces the whole folder each run, so anything not rebuilt would vanish from the live
-  site even though its source data is still sitting in `data/`.
-- If you run the pipeline locally around the same time the Action runs, `git fetch` first --
-  both write to `data/standings/` and `data/scores/`, and a conflict there is a real
-  possibility (see `implementation-notes.md` for what happened the first time).
+## Project layout
+
+```
+data/
+  divisions.json                     # 8 divisions, 32 teams, colors, Yahoo naming
+  bettors.json                       # the 7 names (bettor-1..bettor-7)
+  picks.json                         # LOCKED: everyone's 1–4 order per division
+  tiebreaker.json                    # tiebreaker #5 -- inert until set up
+  standings/<season>-wkNN.json       # weekly Yahoo snapshot
+  scores/<season>-wkNN.json          # derived points per bettor per week
+  weekly_facts/<season>-wkNN.json    # derived stats for that week's analysis
+  weekly_writeups/<season>-wkNN.json # that week's commentary (hand-written)
+  preseason_facts.json / preseason_writeup.json   # one-time preseason report
+
+scripts/
+  run_weekly.py            # entrypoint: scrape -> score -> analyze -> rebuild site/
+  scrape_standings.py      # Yahoo standings (JSON-LD) with validation gate
+  compute_scores.py        # scoring + tiebreakers
+  analyze_week.py          # weekly stats (deltas, gaps, locks, division-winner hopes)
+  generate_*.py            # one per page: site, preseason, week reports, reports hub
+  entry_form.py            # local pick-entry form
+  fetch_logos.py           # one-time logo download
+  _common.py               # shared helpers (ranking with ties, colors, asset sync)
+
+templates/*.html.j2        # Jinja2 templates for every page ("Blitz" style)
+assets/logos/              # team logos, committed (ESPN public CDN, downloaded once)
+site/                      # generated output -- gitignored, rebuilt every run
+.github/workflows/weekly-update.yml   # the manual weekly workflow
+implementation-notes.md    # build log + every design deviation and why
+```
+
+---
+
+## Hosting notes
+
+- The repo is **public** by choice (names and picks only).
+- GitHub Pages deploys from GitHub Actions (Settings → Pages → Source). The workflow needs
+  "Read and write permissions" (Settings → Actions → General) to commit `data/` back.
+- Every run rebuilds the **entire** site, not just what changed. A Pages deploy replaces
+  the whole folder, so any page not rebuilt would disappear from the live site.
+
+## Backups
+
+- **Primary:** GitHub (`thawk238/CCDivBets`). Everything that matters lives in `data/`,
+  which is committed every run; `site/` can always be regenerated from it.
+- **Local snapshots:** zipped copies of the whole folder (including git history) in
+  `C:\aa\VibeCoding\Backups\`, named `NFLDivBets-YYYY-MM-DD.zip`.
 
 ## Team logos
 
-Real logos live in `assets/logos/`, downloaded once via `python scripts/fetch_logos.py`
-from ESPN's public team-logo CDN and committed to the repo (not hotlinked at request time).
-Non-commercial private-pool use.
+Real logos in `assets/logos/`, downloaded once via `python scripts/fetch_logos.py` from
+ESPN's public team-logo CDN and committed (not hotlinked). Non-commercial private-pool use.
