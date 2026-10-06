@@ -53,7 +53,7 @@ scripts/            # see "Weekly workflow" below
 templates/*.html.j2  # Jinja2 templates for every page, "Blitz" visual style
 assets/logos/         # real team logos (ESPN's public CDN, downloaded once)
 site/                 # generated output -- gitignored, rebuilt every run
-.github/workflows/weekly-update.yml   # Tuesday cron automation
+.github/workflows/weekly-update.yml   # weekly pipeline (manual trigger)
 ```
 
 ## Running it locally
@@ -73,8 +73,8 @@ data with bad. Nothing downstream runs until that's resolved.
 
 ## Weekly workflow
 
-Every Tuesday, `.github/workflows/weekly-update.yml` runs automatically (~9 AM Eastern,
-drifts an hour once daylight saving ends in November -- see the comment in that file) and:
+Each week, run `.github/workflows/weekly-update.yml` by hand (GitHub -> Actions ->
+Weekly Update -> Run workflow). It is not on a schedule. It:
 
 1. Scrapes Yahoo, computes scores, rebuilds the leaderboard
 2. Computes that week's fun-facts stats (`data/weekly_facts/`)
