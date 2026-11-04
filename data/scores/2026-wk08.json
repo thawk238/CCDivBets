@@ -1,10 +1,10 @@
 {
   "season": 2026,
   "week": 8,
-  "computed_at": "2026-11-04T14:08:59.311695+00:00",
+  "computed_at": "2026-11-04T14:12:37.202643+00:00",
   "standings_source": {
-    "path": "data\\standings\\2026-wk08.json",
-    "fetched_at": "2026-11-04T14:08:59.224827+00:00"
+    "path": "data/standings/2026-wk08.json",
+    "fetched_at": "2026-11-04T14:12:37.152271+00:00"
   },
   "bettors": {
     "bettor-1": {
